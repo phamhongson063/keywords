@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luyện Tập Từ</title>
+    <title>Luyện Tập - Học Từ Vựng</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <div class="top-bar">
       <div class="back-button-container">
-        <button class="back-button" id="backButton" onclick="window.location.href='../index.html'">
+        <button class="back-button" id="backButton" onclick="window.location.href='practice-menu.html'">
           <span class="back-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -39,7 +39,7 @@
 
       <div class="container">
         <div class="header">
-          <h1>📚 Luyện Tập Từ</h1>
+          <h1 id="pageTitle">📚 Luyện Tập</h1>
         </div>
 
         <div class="vocabulary-card">
@@ -69,13 +69,11 @@
         </div>
 
         <div class="input-section">
-          <label class="input-label" for="answerInput"
-            >Nhập từ vựng:</label
-          >
+          <label class="input-label" id="inputLabel" for="answerInput">Nhập nghĩa của từ:</label>
           <textarea
             id="answerInput"
             class="answer-input"
-            placeholder="Nhập từ vựng và nhấn Enter..."
+            placeholder="Nhập và nhấn Enter..."
             autocomplete="off"
             rows="3"
           ></textarea>
@@ -113,7 +111,7 @@
       <div class="mobile-hint-text" id="mobileHintText"></div>
     </div>
 
-    <script src="../js/practice-word.js"></script>
+    <script src="../js/practice.js"></script>
   </body>
 </html>
 
