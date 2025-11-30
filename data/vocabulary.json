@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "vocabulary": "rare",
+    "meaning": "Hiếm"
+  },
+  {
+    "id": 2,
+    "vocabulary": "hero stats",
+    "meaning": "Chỉ số Anh hùng"
+  },
+  {
+    "id": 3,
+    "vocabulary": "rank",
+    "meaning": "Hạng"
+  },
+  {
+    "id": 4,
+    "vocabulary": "type",
+    "meaning": "Loại"
+  },
+  {
+    "id": 5,
+    "vocabulary": "tank",
+    "meaning": "Chống chịu"
+  },
+  {
+    "id": 6,
+    "vocabulary": "infantry fortitude",
+    "meaning": "Kiên cố Bộ binh"
+  },
+  {
+    "id": 7,
+    "vocabulary": "use",
+    "meaning": "Sử dụng"
+  },
+  {
+    "id": 8,
+    "vocabulary": "level up",
+    "meaning": "Nâng cấp"
+  },
+  {
+    "id": 9,
+    "vocabulary": "lone",
+    "meaning": "đơn độc"
+  },
+  {
+    "id": 10,
+    "vocabulary": "captain",
+    "meaning": "đội trưởng"
+  },
+  {
+    "id": 11,
+    "vocabulary": "stood unyielding",
+    "meaning": "đứng vững, không khuất phục"
+  },
+  {
+    "id": 12,
+    "vocabulary": "fall (of city)",
+    "meaning": "thất thủ, sụp đổ"
+  },
+  {
+    "id": 13,
+    "vocabulary": "led his squad",
+    "meaning": "dẫn dắt biệt đội"
+  },
+  {
+    "id": 14,
+    "vocabulary": "relentless",
+    "meaning": "không ngừng nghỉ, dồn dập"
+  },
+  {
+    "id": 15,
+    "vocabulary": "waves of enemies",
+    "meaning": "làn sóng kẻ thù"
+  },
+  {
+    "id": 16,
+    "vocabulary": "carving a safe path",
+    "meaning": "mở ra con đường an toàn"
+  },
+  {
+    "id": 17,
+    "vocabulary": "saving nearby towns",
+    "meaning": "cứu các thị trấn lân cận"
+  },
+  {
+    "id": 18,
+    "vocabulary": "darkness",
+    "meaning": "Bóng Tối"
+  },
+  {
+    "id": 19,
+    "vocabulary": "brutal battle",
+    "meaning": "trận chiến tàn khốc"
+  },
+  {
+    "id": 20,
+    "vocabulary": "retired",
+    "meaning": "giải ngũ"
+  },
+  {
+    "id": 21,
+    "vocabulary": "threat rises",
+    "meaning": "mối đe dọa trỗi dậy"
+  },
+  {
+    "id": 22,
+    "vocabulary": "kingdom",
+    "meaning": "vương quốc"
+  }
+]
+

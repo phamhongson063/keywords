@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học Từ Vựng</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        /* Background biển với gradient từ xanh trung tính nhạt đến xanh đậm */
+        background: linear-gradient(180deg, 
+          #B0C4DE 0%,      /* Light Steel Blue - màu trời nhạt */
+          #87CEEB 25%,     /* Sky Blue - màu trời */
+          #4682B4 60%,     /* Steel Blue - màu biển trung tính */
+          #2E5C8A 100%     /* Dark Steel Blue - màu biển sâu */
+        );
+        background-attachment: fixed;
+        min-height: 100vh;
+        padding: 20px;
+        padding-left: 0;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Hiệu ứng sóng biển */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Đảm bảo nội dung nằm trên background */
+      .main-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .main-wrapper {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        margin: 0;
+        margin-left: 20px;
+        margin-right: 0;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+      }
+
+      .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex-shrink: 0;
+        margin-right: 20px;
+      }
+
+      .sidebar {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 25px;
+        width: 280px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #4682B4;
+        margin-bottom: 20px;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .word-list {
+        list-style: none;
+      }
+
+      .word-item {
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 10px;
+        border-left: 4px solid #4682B4;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .word-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(70, 130, 180, 0.2);
+      }
+
+      .word-item.current {
+        background: linear-gradient(135deg, #4682B4 0%, #2E5C8A 100%);
+        color: white;
+        border-left-color: white;
+      }
+
+      .word-item.completed {
+        opacity: 0.6;
+        background: #e8f5e9;
+        border-left-color: #4caf50;
+      }
+
+      .word-vocabulary {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+      }
+
+      .word-meaning {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .word-item.current .word-meaning {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        height: calc(100vh - 40px);
+        max-height: 900px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        flex-shrink: 0;
+      }
+
+      .header h1 {
+        color: #4682B4;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .score {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 15px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 15px;
+        flex-shrink: 0;
+      }
+
+      .score-item {
+        text-align: center;
+      }
+
+      .score-label {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 5px;
+      }
+
+      .score-value {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #4682B4;
+      }
+
+      .timer-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        overflow: visible;
+      }
+
+      .timer-wrapper {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        overflow: visible;
+      }
+
+      .timer-circle {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+        overflow: visible;
+      }
+
+      .timer-bg {
+        fill: none;
+        stroke: #e0e0e0;
+        stroke-width: 8;
+      }
+
+      .timer-progress {
+        fill: none;
+        stroke: #4682B4;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-dasharray: 251.2;
+        stroke-dashoffset: 251.2;
+        transition: stroke-dashoffset 0.1s linear;
+      }
+
+      .timer-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #4682B4;
+      }
+
+      .vocabulary-card {
+        background: linear-gradient(135deg, #4682B4 0%, #2E5C8A 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        min-height: 150px;
+        max-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .vocabulary-text {
+        font-size: 2em;
+        font-weight: bold;
+        word-wrap: break-word;
+      }
+
+      .hint-section {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 4px solid #ff9800;
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.2);
+        width: 280px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+
+      .wrong-words-section {
+        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 4px solid #f44336;
+        box-shadow: 0 10px 30px rgba(244, 67, 54, 0.2);
+        width: 280px;
+        flex-shrink: 0;
+        max-height: calc(50vh - 30px);
+        overflow-y: auto;
+      }
+
+      .wrong-words-title {
+        font-size: 1.1em;
+        color: #c62828;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(244, 67, 54, 0.3);
+      }
+
+      .wrong-words-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .wrong-word-item {
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        background: white;
+        border-radius: 8px;
+        border-left: 3px solid #f44336;
+        transition: all 0.3s ease;
+      }
+
+      .wrong-word-item:hover {
+        transform: translateX(3px);
+        box-shadow: 0 3px 10px rgba(244, 67, 54, 0.2);
+      }
+
+      .wrong-word-vocab {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .wrong-word-meaning {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .wrong-words-empty {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+        padding: 20px;
+      }
+
+      .hint-section.active {
+        border-left-color: #ff6f00;
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+      }
+
+      .hint-label {
+        font-size: 1em;
+        color: #e65100;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(255, 152, 0, 0.3);
+      }
+
+      .hint-text {
+        font-size: 1.4em;
+        color: #bf360c;
+        font-weight: 600;
+        text-align: center;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.5;
+      }
+
+      .hint-text.empty {
+        color: #ffb74d;
+        font-size: 1em;
+        font-weight: 500;
+        font-style: italic;
+      }
+
+      /* Mobile hint notification - chỉ hiển thị trên mobile */
+      .mobile-hint-notification {
+        display: none !important;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 40px);
+        max-width: 400px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        background: white;
+        border-left: 3px solid #ff9800;
+        animation: slideDown 0.3s ease;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .mobile-hint-notification.show {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-hint-notification.active {
+        border-left-color: #ff6f00;
+        box-shadow: 0 4px 16px rgba(255, 152, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .mobile-hint-label {
+        display: none;
+      }
+
+      .mobile-hint-text {
+        font-size: 1em;
+        color: #333;
+        font-weight: 500;
+        text-align: left;
+        min-height: auto;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      .input-section {
+        margin-bottom: 20px;
+        flex-shrink: 0;
+      }
+
+      .input-label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: 600;
+        font-size: 1.1em;
+      }
+
+      .answer-input {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1.2em;
+        border: 3px solid #e0e0e0;
+        border-radius: 12px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .answer-input:focus {
+        border-color: #4682B4;
+        box-shadow: 0 0 0 3px rgba(70, 130, 180, 0.1);
+      }
+
+      .answer-input.correct {
+        border-color: #4caf50;
+        background-color: #e8f5e9;
+      }
+
+      .answer-input.wrong {
+        border-color: #f44336;
+        background-color: #ffebee;
+      }
+
+      .answer-input:read-only {
+        cursor: default;
+      }
+
+      .feedback {
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 600;
+        height: 50px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .feedback.show {
+        visibility: visible;
+        opacity: 1;
+        animation: slideIn 0.3s ease;
+      }
+
+      .feedback.correct {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .feedback.wrong {
+        background-color: #ffebee;
+        color: #c62828;
+      }
+
+      .feedback.timeout {
+        background-color: #fff3e0;
+        color: #e65100;
+      }
+
+      .next-button {
+        display: none !important;
+      }
+
+      .next-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(70, 130, 180, 0.4);
+      }
+
+      .next-button:active {
+        transform: translateY(0);
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .timer-wrapper.warning {
+        animation: pulse 1s infinite;
+      }
+
+      .timer-progress.warning {
+        stroke: #ff9800;
+      }
+
+      .timer-progress.danger {
+        stroke: #f44336;
+      }
+
+      @media (max-width: 1024px) {
+        .main-wrapper {
+          flex-direction: column;
+          margin-right: 20px;
+        }
+
+        .sidebar {
+          width: 100%;
+        }
+
+        .right-column {
+          width: 100%;
+        }
+
+        .hint-section {
+          width: 100%;
+          position: relative;
+          top: 0;
+          max-height: none;
+          margin-left: 0;
+        }
+
+        .wrong-words-section {
+          width: 100%;
+          max-height: none;
+        }
+
+        .container {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .right-column {
+          display: none;
+        }
+
+        .container {
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .main-wrapper {
+          margin-left: 0;
+          padding: 10px;
+        }
+
+        body {
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .sidebar {
+          display: none;
+        }
+
+        .right-column {
+          display: none;
+        }
+
+        .wrong-words-section {
+          display: none;
+        }
+
+        .mobile-hint-notification {
+          display: block;
+        }
+
+        .container {
+          padding: 20px;
+          height: auto;
+          max-height: none;
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .vocabulary-text {
+          font-size: 1.8em;
+        }
+
+        .timer-container {
+          position: relative;
+          top: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+        }
+
+        .timer-wrapper {
+          width: auto;
+          height: auto;
+          position: relative;
+        }
+
+        .timer-circle {
+          display: none;
+        }
+
+        .timer-text {
+          position: relative;
+          top: auto;
+          left: auto;
+          transform: none;
+          font-size: 2.5em;
+          font-weight: bold;
+          color: #4682B4;
+          padding: 10px 20px;
+          background: white;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .main-wrapper {
+          margin-left: 0;
+          padding: 10px;
+        }
+
+        body {
+          padding: 10px;
+        }
+
+        .word-item {
+          padding: 10px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="sidebar">
+        <div class="sidebar-title">📋 Danh sách từ</div>
+        <ul class="word-list" id="wordList">
+          <!-- Danh sách từ sẽ được thêm bằng JavaScript -->
+        </ul>
+      </div>
+
+      <div class="container">
+        <div class="header">
+          <h1>📚 Học Từ Vựng</h1>
+        </div>
+
+        <div class="timer-container">
+          <div class="timer-wrapper" id="timerWrapper">
+            <svg
+              class="timer-circle"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <circle class="timer-bg" cx="50" cy="50" r="40"></circle>
+              <circle
+                class="timer-progress"
+                id="timerProgress"
+                cx="50"
+                cy="50"
+                r="40"
+              ></circle>
+            </svg>
+            <div class="timer-text" id="timerText">20</div>
+          </div>
+        </div>
+
+        <div class="score">
+          <div class="score-item">
+            <div class="score-label">Điểm</div>
+            <div class="score-value" id="score">0</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Đúng</div>
+            <div class="score-value" id="correct">0</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Sai</div>
+            <div class="score-value" id="wrong">0</div>
+          </div>
+        </div>
+
+        <div class="vocabulary-card">
+          <div class="vocabulary-text" id="vocabularyText">Đang tải...</div>
+        </div>
+
+        <div class="input-section">
+          <label class="input-label" for="answerInput"
+            >Nhập nghĩa của từ:</label
+          >
+          <input
+            type="text"
+            id="answerInput"
+            class="answer-input"
+            placeholder="Nhập nghĩa và nhấn Enter..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-button" id="nextButton">Từ tiếp theo →</button>
+      </div>
+
+      <div class="right-column">
+        <div class="hint-section" id="hintSection">
+          <div class="hint-label">💡 Gợi ý</div>
+          <div class="hint-text empty" id="hintText"></div>
+        </div>
+
+        <div class="wrong-words-section" id="wrongWordsSection">
+          <div class="wrong-words-title">❌ Từ đã sai</div>
+          <ul class="wrong-words-list" id="wrongWordsList">
+            <li class="wrong-words-empty">Chưa có từ nào sai</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hint notification riêng cho mobile -->
+    <div class="mobile-hint-notification" id="mobileHintNotification">
+      <div class="mobile-hint-label">💡 Gợi ý</div>
+      <div class="mobile-hint-text" id="mobileHintText"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
