@@ -1,0 +1,149 @@
+/* Common styles for all pages */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Tắt popup research của browser cho tất cả elements */
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tắt select text cho tất cả elements */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cho phép select text trong input và textarea */
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Disable ALL transition, animation, and transform effects when changing routes */
+#app,
+#app *,
+router-view,
+router-view *,
+.router-view,
+.router-view *,
+[data-v-],
+[data-v-] *,
+.v-enter-active,
+.v-leave-active,
+.v-enter-from,
+.v-leave-to,
+.v-enter,
+.v-leave,
+.v-enter-to,
+.v-leave-from,
+.desktop-container,
+.home-container,
+.menu-container,
+.dashboard-container,
+.computer-screen,
+.screen-content {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+  scale: 1 !important;
+  opacity: 1 !important;
+  will-change: auto !important;
+}
+
+/* Exception: Allow menu-icon to have transform on hover - must be after the disable rule */
+/* Use more specific selector to override #app * */
+#app .menu-item:hover .menu-icon,
+#app .menu-item:active .menu-icon,
+.menu-item:hover .menu-icon,
+.menu-item:active .menu-icon {
+  transform: scale(1.1) rotate(20deg) !important;
+  transition: transform 0.3s ease !important;
+}
+
+
+/* Exception: Allow flashcard to have transform for flip animation */
+#flashcard-page .flashcard {
+  transform: none !important;
+  transition: transform 0.6s ease !important;
+}
+
+#flashcard-page .flashcard.flipped {
+  transform: rotateY(180deg) !important;
+}
+
+#flashcard-page .flashcard-inner {
+  transform-style: preserve-3d !important;
+}
+
+#flashcard-page .flashcard-front {
+  transform: rotateY(0deg) !important;
+}
+
+#flashcard-page .flashcard-back {
+  transform: rotateY(180deg) !important;
+}
+
+/* Ensure router-view has proper display */
+router-view {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Practice page background */
+body.practice-page {
+  /* Background biển với gradient từ xanh trung tính nhạt đến xanh đậm - nhạt hơn */
+  background: linear-gradient(
+    180deg,
+    #c5d5e5 0%,
+    /* Light Steel Blue nhạt hơn */ #a8d5e8 25%,
+    /* Sky Blue nhạt hơn */ #6ba8d6 60%,
+    /* Steel Blue nhạt hơn */ #5a9fd4 100%
+      /* Dark Steel Blue nhạt hơn */
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 20px;
+  padding-left: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Hiệu ứng sóng biển cho practice page */
+body.practice-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      ellipse at 20% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 40% 40%,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Bỏ padding của practice-page trên mobile */
+@media (max-width: 600px) {
+  body.practice-page {
+    padding: 0 !important;
+  }
+}
+

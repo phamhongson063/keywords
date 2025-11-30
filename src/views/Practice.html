@@ -1,0 +1,78 @@
+<div>
+  <div class="top-bar">
+    <div class="back-button-container">
+      <button class="back-button" id="backButton" @click="goToPracticeMenu">
+        <span class="back-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="back-text">Quay lại</span>
+      </button>
+    </div>
+    <div class="score" id="topScore">
+      <div class="score-item">
+        <div class="score-label">Đúng</div>
+        <div class="score-value" id="correct">0</div>
+      </div>
+      <div class="score-item">
+        <div class="score-label">Sai</div>
+        <div class="score-value" id="wrong">0</div>
+      </div>
+    </div>
+  </div>
+  <div class="main-wrapper">
+    <div class="sidebar">
+      <div class="sidebar-title">📋 Danh sách từ</div>
+      <ul class="word-list" id="wordList">
+        <!-- Danh sách từ sẽ được thêm bằng JavaScript -->
+      </ul>
+    </div>
+    <div class="container">
+      <div class="header">
+        <h1 id="pageTitle">📚 Luyện Tập</h1>
+      </div>
+      <div class="vocabulary-card">
+        <div class="vocabulary-text" id="vocabularyText">Đang tải...</div>
+      </div>
+      <div class="timer-container-wrapper">
+        <div class="timer-container">
+          <div class="timer-wrapper" id="timerWrapper">
+            <svg class="timer-circle" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <circle class="timer-bg" cx="50" cy="50" r="40"></circle>
+              <circle class="timer-progress" id="timerProgress" cx="50" cy="50" r="40"></circle>
+            </svg>
+            <div class="timer-text" id="timerText">20</div>
+          </div>
+        </div>
+      </div>
+      <div class="input-section">
+        <label class="input-label" id="inputLabel" for="answerInput">Nhập nghĩa của từ:</label>
+        <textarea id="answerInput" class="answer-input" placeholder="Nhập và nhấn Enter..." autocomplete="off" rows="3"></textarea>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-button" id="nextButton">Từ tiếp theo →</button>
+      <button class="mobile-next-button" id="mobileNextButton">
+        <span class="mobile-next-icon">→</span>
+        <span class="mobile-next-text">Tiếp theo</span>
+      </button>
+    </div>
+    <div class="right-column">
+      <div class="hint-section" id="hintSection">
+        <div class="hint-label">💡 Gợi ý</div>
+        <div class="hint-text empty" id="hintText"></div>
+      </div>
+      <div class="wrong-words-section" id="wrongWordsSection">
+        <div class="wrong-words-title">❌ Từ đã sai</div>
+        <ul class="wrong-words-list" id="wrongWordsList">
+          <li class="wrong-words-empty">Chưa có từ nào sai</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-hint-notification" id="mobileHintNotification">
+    <div class="mobile-hint-label">💡 Gợi ý</div>
+    <div class="mobile-hint-text" id="mobileHintText"></div>
+  </div>
+</div>
+

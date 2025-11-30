@@ -1,60 +1,62 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Flashcard page specific styles */
+/* Note: Global styles are in common.css */
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #ffffff;
+#flashcard-page {
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .back-button-container {
-  width: 100%;
-  max-width: 900px;
-  padding: 20px 20px 0 20px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
   display: flex;
   justify-content: flex-start;
+  pointer-events: auto;
 }
 
 .back-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: transparent;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  font-size: 1em;
-  font-weight: 600;
-  color: #2d3748;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  box-shadow: none;
+  z-index: 9999;
+  flex-shrink: 0;
+  flex-grow: 0;
+  position: relative;
+  pointer-events: auto;
 }
 
 .back-button:hover {
-  background: #f5f5f5;
-  border-color: #bdbdbd;
-  transform: translateX(-3px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .back-button:active {
-  transform: translateX(-1px);
+  transform: scale(0.95);
 }
 
 .back-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #6ba8d6;
 }
 
 .back-icon svg {
@@ -63,26 +65,31 @@ body {
 }
 
 .back-text {
-  font-weight: 600;
+  display: none;
 }
 
 @media (max-width: 600px) {
   .back-button-container {
-    padding: 15px 15px 0 15px;
+    top: 10px;
+    left: 10px;
+    position: fixed;
+    z-index: 9999;
   }
 
   .back-button {
-    padding: 10px 15px;
-    font-size: 0.9em;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    min-width: 40px !important;
   }
 
   .back-text {
-    display: none;
+    display: none !important;
   }
-
-  .back-button {
-    padding: 12px;
-    min-width: 40px;
+  
+  .back-icon svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 }
 
@@ -95,7 +102,11 @@ body {
   justify-content: flex-start;
   gap: 40px;
   min-height: 100vh;
-  padding: 40px 20px 40px 20px;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: 40px !important;
+  box-sizing: border-box;
 }
 
 .flashcard-header {
@@ -147,7 +158,7 @@ body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 20px;
+  border-radius: 0;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
@@ -159,6 +170,7 @@ body {
 .flashcard-front {
   background: linear-gradient(135deg, #f1f8f4 0%, #f0f7f2 100%);
   color: #2d3748;
+  transform: rotateY(0deg);
 }
 
 .flashcard-back {
@@ -167,14 +179,14 @@ body {
   transform: rotateY(180deg);
 }
 
-.flashcard-front:hover,
-.flashcard-back:hover {
-  transform: scale(1.02);
+.flashcard-front:hover {
+  transform: rotateY(0deg) scale(1.02);
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
 }
 
 .flashcard-back:hover {
   transform: rotateY(180deg) scale(1.02);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
 }
 
 .flashcard-content {
@@ -197,8 +209,6 @@ body {
   flex-shrink: 0;
   color: white;
   border-radius: 0;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
 }
 
 .flashcard-front .flashcard-label {
@@ -237,7 +247,7 @@ body {
   padding: 15px 25px;
   background: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 1.1em;
   font-weight: 600;
   color: white;
@@ -325,7 +335,8 @@ body {
 @media (max-width: 768px) {
   .flashcard-container {
     gap: 30px;
-    padding: 30px 15px;
+    padding: 0;
+    margin-top: 40px !important;
   }
 
   .flashcard-header h1 {
@@ -362,7 +373,8 @@ body {
 @media (max-width: 600px) {
   .flashcard-container {
     gap: 25px;
-    padding: 20px 15px;
+    padding: 0;
+    margin-top: 40px !important;
   }
 
   .flashcard-header h1 {

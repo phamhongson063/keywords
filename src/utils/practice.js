@@ -13,26 +13,48 @@ let upcomingWords = [];
 let completedWords = [];
 let wrongWords = []; // Danh sách các từ đã sai
 
-const vocabularyText = document.getElementById('vocabularyText');
-const answerInput = document.getElementById('answerInput');
-const feedback = document.getElementById('feedback');
-const nextButton = document.getElementById('nextButton');
-const timerText = document.getElementById('timerText');
-const timerProgress = document.getElementById('timerProgress');
-const timerWrapper = document.getElementById('timerWrapper');
-const scoreElement = document.getElementById('score');
-const correctElement = document.getElementById('correct');
-const wrongElement = document.getElementById('wrong');
-const hintSection = document.getElementById('hintSection');
-const hintText = document.getElementById('hintText');
-const wordList = document.getElementById('wordList');
-const mobileHintNotification = document.getElementById('mobileHintNotification');
-const mobileHintText = document.getElementById('mobileHintText');
-const mobileNextButton = document.getElementById('mobileNextButton');
-const wrongWordsList = document.getElementById('wrongWordsList');
+// DOM elements - will be updated each time page loads
+let vocabularyText = null;
+let answerInput = null;
+let feedback = null;
+let nextButton = null;
+let timerText = null;
+let timerProgress = null;
+let timerWrapper = null;
+let scoreElement = null;
+let correctElement = null;
+let wrongElement = null;
+let hintSection = null;
+let hintText = null;
+let wordList = null;
+let mobileHintNotification = null;
+let mobileHintText = null;
+let mobileNextButton = null;
+let wrongWordsList = null;
 
-// Debug: Kiểm tra mobileNextButton có được tìm thấy không
-console.log('mobileNextButton found:', mobileNextButton);
+// Function to get/update DOM elements
+function getElements() {
+    vocabularyText = document.getElementById('vocabularyText');
+    answerInput = document.getElementById('answerInput');
+    feedback = document.getElementById('feedback');
+    nextButton = document.getElementById('nextButton');
+    timerText = document.getElementById('timerText');
+    timerProgress = document.getElementById('timerProgress');
+    timerWrapper = document.getElementById('timerWrapper');
+    scoreElement = document.getElementById('score');
+    correctElement = document.getElementById('correct');
+    wrongElement = document.getElementById('wrong');
+    hintSection = document.getElementById('hintSection');
+    hintText = document.getElementById('hintText');
+    wordList = document.getElementById('wordList');
+    mobileHintNotification = document.getElementById('mobileHintNotification');
+    mobileHintText = document.getElementById('mobileHintText');
+    mobileNextButton = document.getElementById('mobileNextButton');
+    wrongWordsList = document.getElementById('wrongWordsList');
+    
+    // Debug: Kiểm tra mobileNextButton có được tìm thấy không
+    console.log('mobileNextButton found:', mobileNextButton);
+}
 
 const circumference = 2 * Math.PI * 40; // r = 40
 const maxTime = 20;
@@ -82,19 +104,72 @@ if (pageTitle) pageTitle.textContent = config.title;
 if (inputLabel) inputLabel.textContent = config.label;
 if (answerInput) answerInput.placeholder = config.placeholder;
 
+// Reset game state function (exported for Vue component to use)
+function resetGameState() {
+    // Clear timer
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    
+    // Reset variables
+    currentIndex = -1;
+    currentWord = null;
+    timeLeft = 20;
+    score = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    isAnswered = false;
+    usedIndices = [];
+    hintShown = false;
+    upcomingWords = [];
+    completedWords = [];
+    wrongWords = [];
+    
+    // Reset UI elements
+    if (vocabularyText) vocabularyText.textContent = '';
+    if (answerInput) {
+        answerInput.value = '';
+        answerInput.disabled = false;
+    }
+    if (feedback) {
+        feedback.textContent = '';
+        feedback.className = '';
+        feedback.style.display = 'none';
+    }
+    if (timerText) timerText.textContent = '';
+    if (timerProgress) timerProgress.style.width = '100%';
+    if (scoreElement) scoreElement.textContent = '0';
+    if (correctElement) correctElement.textContent = '0';
+    if (wrongElement) wrongElement.textContent = '0';
+    if (hintSection) hintSection.style.display = 'none';
+    if (mobileHintNotification) {
+        mobileHintNotification.classList.remove('show', 'active');
+        if (mobileHintText) mobileHintText.textContent = '';
+    }
+    if (wordList) wordList.innerHTML = '';
+    if (wrongWordsList) wrongWordsList.innerHTML = '';
+}
+
+// Export resetGameState to window for Vue component
+window.resetGameState = resetGameState;
+
 // Load vocabulary data
 async function loadVocabulary() {
+    // Ensure DOM elements are available
+    getElements();
+    
     try {
-        const response = await fetch('../data/vocabulary.json');
+        const response = await fetch('src/assets/data/vocabulary.json');
         vocabularyData = await response.json();
         if (vocabularyData.length === 0) {
-            vocabularyText.textContent = 'Không có dữ liệu từ vựng';
+            if (vocabularyText) vocabularyText.textContent = 'Không có dữ liệu từ vựng';
             return;
         }
         startGame();
     } catch (error) {
         console.error('Error loading vocabulary:', error);
-        vocabularyText.textContent = 'Lỗi khi tải dữ liệu';
+        if (vocabularyText) vocabularyText.textContent = 'Lỗi khi tải dữ liệu';
     }
 }
 
@@ -310,6 +385,9 @@ function updateWordList() {
 }
 
 function startGame() {
+    // Ensure DOM elements are available
+    getElements();
+    
     console.log('=== startGame called ===');
     // Tạo danh sách 5 từ ban đầu
     generateUpcomingWords();
@@ -324,6 +402,9 @@ function startGame() {
         // Hiển thị từ đầu tiên theo mode
         if (vocabularyText && currentWord) {
             vocabularyText.textContent = currentWord[config.displayField];
+            console.log('Vocabulary text set to:', currentWord[config.displayField]);
+        } else {
+            console.error('vocabularyText or currentWord is null:', { vocabularyText, currentWord });
         }
         
         // Cập nhật danh sách
@@ -452,9 +533,16 @@ function nextWord() {
         
         // Cập nhật DOM ngay lập tức - KHÔNG dùng requestAnimationFrame để tránh delay
         try {
+            // Ensure elements are available
+            getElements();
+            
             if (vocabularyText) {
                 vocabularyText.textContent = currentWord[config.displayField];
                 console.log('Vocabulary text updated to:', currentWord[config.displayField]);
+                console.log('vocabularyText element:', vocabularyText);
+                console.log('vocabularyText computed style:', window.getComputedStyle(vocabularyText));
+            } else {
+                console.error('vocabularyText is null when trying to update');
             }
             
             if (answerInput) {
@@ -558,6 +646,9 @@ function nextWord() {
 }
 
 function resetTimer() {
+    // Ensure elements are available
+    getElements();
+    
     // Clear timer trước khi reset
     if (timer) {
         clearInterval(timer);
@@ -762,13 +853,16 @@ function handleTimeout() {
     isAnswered = true;
     if (!currentWord) return;
     
+    // Ensure elements are available
+    getElements();
+    
     // Khóa input khi hết thời gian
-        if (answerInput) {
-            answerInput.readOnly = true;
-            answerInput.disabled = false; // Giữ disabled = false để vẫn có thể focus và nhấn Enter
-            answerInput.setAttribute('data-answered', 'true');
-            answerInput.className = 'answer-input wrong';
-        }
+    if (answerInput) {
+        answerInput.readOnly = true;
+        answerInput.disabled = false; // Giữ disabled = false để vẫn có thể focus và nhấn Enter
+        answerInput.setAttribute('data-answered', 'true');
+        answerInput.className = 'answer-input wrong';
+    }
     
     if (feedback) {
         feedback.className = 'feedback timeout show';
@@ -797,6 +891,9 @@ function handleTimeout() {
     const isMobile = window.innerWidth <= 600;
     console.log('handleTimeout - isMobile:', isMobile, 'mobileNextButton:', mobileNextButton);
     if (isMobile) {
+        // Get elements again to ensure mobileNextButton is available
+        getElements();
+        
         if (mobileNextButton) {
             // Force reflow để đảm bảo CSS được áp dụng
             void mobileNextButton.offsetWidth;
@@ -809,6 +906,15 @@ function handleTimeout() {
             console.log('Mobile next button computed style:', window.getComputedStyle(mobileNextButton).display);
         } else {
             console.error('mobileNextButton not found in handleTimeout!');
+            // Retry after a short delay
+            setTimeout(() => {
+                getElements();
+                if (mobileNextButton) {
+                    mobileNextButton.style.display = 'flex';
+                    mobileNextButton.style.visibility = 'visible';
+                    mobileNextButton.classList.add('show');
+                }
+            }, 100);
         }
         
         // Ẩn hint notification khi hiển thị button next
@@ -822,6 +928,8 @@ function handleTimeout() {
 }
 
 function checkAnswer() {
+    // Ensure elements are available
+    getElements();
     if (isAnswered) return;
     
     if (!currentWord || !currentWord[config.answerField]) {
@@ -970,6 +1078,9 @@ function checkAnswer() {
 }
 
 function updateScore() {
+    // Ensure elements are available
+    getElements();
+    
     try {
         if (scoreElement) scoreElement.textContent = score;
         if (correctElement) correctElement.textContent = correctCount;
@@ -980,6 +1091,9 @@ function updateScore() {
 }
 
 function updateWrongWordsList() {
+    // Ensure elements are available
+    getElements();
+    
     if (!wrongWordsList) {
         console.error('wrongWordsList element not found');
         return;
@@ -1021,6 +1135,8 @@ function updateWrongWordsList() {
 
 // Đảm bảo DOM đã load trước khi thêm event listeners
 function initEventListeners() {
+    // Update DOM elements first
+    getElements();
     console.log('Initializing event listeners...');
     console.log('answerInput:', answerInput);
     console.log('nextButton:', nextButton);
@@ -1091,7 +1207,31 @@ function initEventListeners() {
     }
 
     // Chỉ dùng MỘT event listener cho tất cả
-    if (answerInput) {
+    // Ensure elements are available before adding listeners
+    getElements();
+    
+    if (!answerInput) {
+        console.error('answerInput not found in initEventListeners, will retry...');
+        // Retry after a short delay
+        setTimeout(() => {
+            getElements();
+            if (answerInput) {
+                answerInput.addEventListener('keydown', handleEnterKey);
+                answerInput.addEventListener('focus', () => {
+                    const isMobile = window.innerWidth <= 600;
+                    if (isMobile && vocabularyText) {
+                        setTimeout(() => {
+                            vocabularyText.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 400);
+                    }
+                    if (hintSection) hintSection.classList.remove('active');
+                });
+            } else {
+                console.error('answerInput still not found after retry');
+            }
+        }, 200);
+        // Continue with other listeners even if answerInput is not found yet
+    } else {
         answerInput.addEventListener('keydown', handleEnterKey);
         
         // Scroll đến vocabulary-card khi input được focus trên mobile
@@ -1115,8 +1255,6 @@ function initEventListeners() {
                 }
             }
         });
-    } else {
-        console.error('answerInput not found');
     }
     
     // Backup listener cho document
@@ -1128,7 +1266,16 @@ function initEventListeners() {
             nextWord();
         });
     } else {
-        console.error('nextButton not found');
+        console.error('nextButton not found, will retry...');
+        setTimeout(() => {
+            getElements();
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    console.log('Next button clicked');
+                    nextWord();
+                });
+            }
+        }, 200);
     }
     
     // Event listener cho mobile next button
@@ -1144,7 +1291,21 @@ function initEventListeners() {
             nextWord();
         });
     } else {
-        console.error('mobileNextButton not found');
+        console.error('mobileNextButton not found, will retry...');
+        setTimeout(() => {
+            getElements();
+            if (mobileNextButton) {
+                mobileNextButton.addEventListener('click', () => {
+                    console.log('Mobile next button clicked');
+                    nextWord();
+                });
+                mobileNextButton.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    console.log('Mobile next button touched');
+                    nextWord();
+                });
+            }
+        }, 200);
     }
     
     console.log('Event listeners initialized');
@@ -1221,9 +1382,11 @@ function disableBrowserResearch() {
     }, true);
 }
 
-// Khởi tạo event listeners khi DOM ready
+// Khởi tạo event listeners khi DOM ready (chỉ chạy khi script load lần đầu)
+// Khi dùng với Vue, các hàm này sẽ được gọi từ Practice.js component
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        getElements();
         // Đảm bảo mobile hint notification bị ẩn khi khởi tạo
         if (mobileHintNotification) {
             mobileHintNotification.classList.remove('show', 'active');
@@ -1234,13 +1397,18 @@ if (document.readyState === 'loading') {
         loadVocabulary();
     });
 } else {
-    // Đảm bảo mobile hint notification bị ẩn khi khởi tạo
-    if (mobileHintNotification) {
-        mobileHintNotification.classList.remove('show', 'active');
-        if (mobileHintText) mobileHintText.textContent = '';
+    // Chỉ chạy nếu không phải trong Vue context (tránh double initialization)
+    // Vue component sẽ gọi initEventListeners() và loadVocabulary() riêng
+    if (!window.__vueAppInitialized) {
+        getElements();
+        // Đảm bảo mobile hint notification bị ẩn khi khởi tạo
+        if (mobileHintNotification) {
+            mobileHintNotification.classList.remove('show', 'active');
+            if (mobileHintText) mobileHintText.textContent = '';
+        }
+        disableBrowserResearch();
+        initEventListeners();
+        loadVocabulary();
     }
-    disableBrowserResearch();
-    initEventListeners();
-    loadVocabulary();
 }
 
