@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học Từ Vựng</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="back-button-container">
+      <button class="back-button" id="backButton" onclick="window.location.href='../index.html'">
+        <span class="back-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="back-text">Quay lại</span>
+      </button>
+    </div>
+    <div class="main-wrapper">
+      <div class="sidebar">
+        <div class="sidebar-title">📋 Danh sách từ</div>
+        <ul class="word-list" id="wordList">
+          <!-- Danh sách từ sẽ được thêm bằng JavaScript -->
+        </ul>
+      </div>
+
+      <div class="container">
+        <div class="header">
+          <h1>📚 Học Từ Vựng</h1>
+        </div>
+
+        <div class="timer-score-wrapper">
+          <div class="timer-container">
+            <div class="timer-wrapper" id="timerWrapper">
+              <svg
+                class="timer-circle"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <circle class="timer-bg" cx="50" cy="50" r="40"></circle>
+                <circle
+                  class="timer-progress"
+                  id="timerProgress"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                ></circle>
+              </svg>
+              <div class="timer-text" id="timerText">20</div>
+            </div>
+          </div>
+
+          <div class="score">
+          <div class="score-item">
+            <div class="score-label">Điểm</div>
+            <div class="score-value" id="score">0</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Đúng</div>
+            <div class="score-value" id="correct">0</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Sai</div>
+            <div class="score-value" id="wrong">0</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="vocabulary-card">
+          <div class="vocabulary-text" id="vocabularyText">Đang tải...</div>
+        </div>
+
+        <div class="input-section">
+          <label class="input-label" for="answerInput"
+            >Nhập nghĩa của từ:</label
+          >
+          <input
+            type="text"
+            id="answerInput"
+            class="answer-input"
+            placeholder="Nhập nghĩa và nhấn Enter..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-button" id="nextButton">Từ tiếp theo →</button>
+
+        <!-- Mobile Next Button - chỉ hiển thị trên mobile khi có kết quả -->
+        <button class="mobile-next-button" id="mobileNextButton">
+          <span class="mobile-next-icon">→</span>
+          <span class="mobile-next-text">Tiếp theo</span>
+        </button>
+      </div>
+
+      <div class="right-column">
+        <div class="hint-section" id="hintSection">
+          <div class="hint-label">💡 Gợi ý</div>
+          <div class="hint-text empty" id="hintText"></div>
+        </div>
+
+        <div class="wrong-words-section" id="wrongWordsSection">
+          <div class="wrong-words-title">❌ Từ đã sai</div>
+          <ul class="wrong-words-list" id="wrongWordsList">
+            <li class="wrong-words-empty">Chưa có từ nào sai</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hint notification riêng cho mobile -->
+    <div class="mobile-hint-notification" id="mobileHintNotification">
+      <div class="mobile-hint-label">💡 Gợi ý</div>
+      <div class="mobile-hint-text" id="mobileHintText"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
