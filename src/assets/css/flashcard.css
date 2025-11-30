@@ -86,7 +86,7 @@
   .back-text {
     display: none !important;
   }
-  
+
   .back-icon svg {
     width: 18px !important;
     height: 18px !important;
@@ -201,14 +201,17 @@
 .flashcard-label {
   font-size: 1.2em;
   opacity: 1;
-  padding: 25px 40px 15px 40px;
-  font-weight: 600;
+  width: 100%;
+  padding: 10px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 3px;
+  text-align: center;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
   color: white;
   border-radius: 0;
+  box-sizing: border-box;
 }
 
 .flashcard-front .flashcard-label {
@@ -221,7 +224,6 @@
 
 .flashcard-text {
   font-size: 3em;
-  font-weight: bold;
   line-height: 1.4;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -230,6 +232,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#meaningText,
+.flashcard-back .flashcard-text {
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: normal;
 }
 
 .flashcard-controls {
@@ -421,4 +430,3 @@
     padding: 15px;
   }
 }
-

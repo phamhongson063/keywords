@@ -11,12 +11,24 @@
   <body>
     <div id="app"></div>
     
+    <!-- Redirect script - must run FIRST before any other scripts -->
+    <script>
+      // Prevent direct URL access with query params - redirect to home
+      // This runs immediately, before any other scripts
+      (function() {
+        if (window.location.search) {
+          window.location.replace(window.location.pathname + '#/');
+        }
+      })();
+    </script>
+    
     <!-- Vue 3 from CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
     
-    <!-- Load templates first -->
-    <script src="src/utils/templates.js"></script>
+    <!-- Load components first -->
+    <script src="src/components/PracticeComponent.js"></script>
+    <script src="src/components/FlashcardComponent.js"></script>
     
     <!-- Load views (pages) - must be loaded before router -->
     <script src="src/views/Home.js"></script>
@@ -31,27 +43,15 @@
     <!-- Load App -->
     <script src="src/App.js"></script>
     
-    <!-- Load main app after templates are loaded -->
+    <!-- Load main app -->
     <script>
-      // Load all templates before initializing the app
-      loadAllTemplates().then(() => {
-        console.log('All templates loaded, initializing app...');
-        // Wait a bit to ensure all components and router are loaded
-        setTimeout(() => {
-          // Load main app after everything is ready
-          const script = document.createElement('script');
-          script.src = 'src/main.js';
-          document.head.appendChild(script);
-        }, 100);
-      }).catch(error => {
-        console.error('Error loading templates:', error);
-        // Still try to load main.js even if templates fail
-        setTimeout(() => {
-          const script = document.createElement('script');
-          script.src = 'src/main.js';
-          document.head.appendChild(script);
-        }, 100);
-      });
+      // Wait a bit to ensure all components and router are loaded
+      setTimeout(() => {
+        // Load main app after everything is ready
+        const script = document.createElement('script');
+        script.src = 'src/main.js';
+        document.head.appendChild(script);
+      }, 100);
     </script>
     
     <!-- CSS loading is now handled in src/main.js via router.afterEach -->

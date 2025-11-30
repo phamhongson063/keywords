@@ -1,8 +1,30 @@
 // Home View Component
+const HomeTemplate = `<div class="desktop-container">
+  <div class="computer-screen">
+    <svg class="screen-frame" viewBox="0 0 800 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="800" height="600" fill="#2c2c2c" rx="15"/>
+      <rect x="20" y="20" width="760" height="520" fill="#1a1a1a" rx="8"/>
+      <rect x="30" y="30" width="740" height="500" fill="#0a0a0a" rx="5"/>
+      <ellipse cx="400" cy="580" rx="120" ry="15" fill="#2c2c2c"/>
+      <rect x="380" y="530" width="40" height="50" fill="#2c2c2c"/>
+    </svg>
+    <div class="screen-content">
+      <div class="dashboard-container">
+        <div class="dashboard-item" @click="$router.push('/flashcard')">
+          <div class="dashboard-icon">🃏</div>
+          <div class="dashboard-title">Flash card</div>
+        </div>
+        <div class="dashboard-item" @click="$router.push('/practice-menu')">
+          <div class="dashboard-icon">🎯</div>
+          <div class="dashboard-title">Luyện Tập</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+
 const Home = {
-  get template() {
-    return window.Templates?.Home || '<div>Loading template...</div>';
-  },
+  template: HomeTemplate,
   mounted() {
     // Disable browser research features
     const handlers = {

@@ -3,9 +3,24 @@ const { createApp } = Vue;
 
 // Prevent direct URL access with query params - redirect to home
 // Always check and redirect if query params exist
-if (window.location.search) {
-  window.location.replace(window.location.pathname + '#/');
+function checkAndRedirectQueryParams() {
+  if (window.location.search) {
+    const cleanUrl = window.location.pathname + '#/';
+    window.location.replace(cleanUrl);
+    return true;
+  }
+  return false;
 }
+
+// Check immediately on load - this runs before Vue router initializes
+// Use a more aggressive approach
+(function() {
+  if (window.location.search) {
+    window.location.replace(window.location.pathname + '#/');
+    // Prevent further execution
+    return;
+  }
+})();
 
 // Utility function to normalize Vietnamese text
 function normalize(text) {

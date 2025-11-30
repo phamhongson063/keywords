@@ -12,7 +12,7 @@
 body {
   -webkit-user-select: none;
   user-select: none;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 /* Cho phép select text trong input và textarea */
@@ -64,19 +64,30 @@ router-view *,
   transition: transform 0.3s ease !important;
 }
 
-
 /* Exception: Allow flashcard to have transform for flip animation */
+#flashcard-page .flashcard-wrapper {
+  transform: none !important;
+  transform-style: preserve-3d !important;
+}
+
 #flashcard-page .flashcard {
   transform: none !important;
   transition: transform 0.6s ease !important;
+  transform-style: preserve-3d !important;
 }
 
 #flashcard-page .flashcard.flipped {
   transform: rotateY(180deg) !important;
 }
 
-#flashcard-page .flashcard-inner {
+#flashcard-page .flashcard-front,
+#flashcard-page .flashcard-back {
   transform-style: preserve-3d !important;
+  backface-visibility: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 #flashcard-page .flashcard-front {
@@ -85,6 +96,67 @@ router-view *,
 
 #flashcard-page .flashcard-back {
   transform: rotateY(180deg) !important;
+}
+
+#flashcard-page .flashcard-front:hover {
+  transform: rotateY(0deg) scale(1.02) !important;
+}
+
+#flashcard-page .flashcard-back:hover {
+  transform: rotateY(180deg) scale(1.02) !important;
+}
+
+/* Exception: Allow flashcard content and label to display properly */
+#flashcard-page .flashcard-content {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  height: 100% !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+
+#flashcard-page .flashcard-label {
+  display: block !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  font-size: 1.2em !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  padding: 10px !important;
+  color: white !important;
+  flex-shrink: 0 !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#flashcard-page .flashcard-front .flashcard-label {
+  background: rgba(76, 175, 80, 0.8) !important;
+}
+
+#flashcard-page .flashcard-back .flashcard-label {
+  background: rgba(255, 152, 0, 0.8) !important;
+}
+
+#flashcard-page .flashcard-text {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.6em !important;
+  line-height: 1.4 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  padding: 40px !important;
+  flex: 1 !important;
+}
+
+#flashcard-page #meaningText,
+#flashcard-page .flashcard-back .flashcard-text {
+  padding: 0 !important;
+  font-size: 1.5em !important;
+  font-weight: normal !important;
 }
 
 /* Ensure router-view has proper display */
@@ -102,8 +174,7 @@ body.practice-page {
     #c5d5e5 0%,
     /* Light Steel Blue nhạt hơn */ #a8d5e8 25%,
     /* Sky Blue nhạt hơn */ #6ba8d6 60%,
-    /* Steel Blue nhạt hơn */ #5a9fd4 100%
-      /* Dark Steel Blue nhạt hơn */
+    /* Steel Blue nhạt hơn */ #5a9fd4 100% /* Dark Steel Blue nhạt hơn */
   );
   background-attachment: fixed;
   min-height: 100vh;
@@ -146,4 +217,3 @@ body.practice-page::before {
     padding: 0 !important;
   }
 }
-
