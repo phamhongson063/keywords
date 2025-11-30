@@ -7,15 +7,27 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="back-button-container">
-      <button class="back-button" id="backButton" onclick="window.location.href='../index.html'">
-        <span class="back-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="back-text">Quay lại</span>
-      </button>
+    <div class="top-bar">
+      <div class="back-button-container">
+        <button class="back-button" id="backButton" onclick="window.location.href='../index.html'">
+          <span class="back-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="back-text">Quay lại</span>
+        </button>
+      </div>
+      <div class="score" id="topScore">
+        <div class="score-item">
+          <div class="score-label">Đúng</div>
+          <div class="score-value" id="correct">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Sai</div>
+          <div class="score-value" id="wrong">0</div>
+        </div>
+      </div>
     </div>
     <div class="main-wrapper">
       <div class="sidebar">
@@ -30,7 +42,11 @@
           <h1>✍️ Luyện Chính Tả</h1>
         </div>
 
-        <div class="timer-score-wrapper">
+        <div class="vocabulary-card">
+          <div class="vocabulary-text" id="vocabularyText">Đang tải...</div>
+        </div>
+
+        <div class="timer-container-wrapper">
           <div class="timer-container">
             <div class="timer-wrapper" id="timerWrapper">
               <svg
@@ -50,38 +66,19 @@
               <div class="timer-text" id="timerText">20</div>
             </div>
           </div>
-
-          <div class="score">
-          <div class="score-item">
-            <div class="score-label">Điểm</div>
-            <div class="score-value" id="score">0</div>
-          </div>
-          <div class="score-item">
-            <div class="score-label">Đúng</div>
-            <div class="score-value" id="correct">0</div>
-          </div>
-          <div class="score-item">
-            <div class="score-label">Sai</div>
-            <div class="score-value" id="wrong">0</div>
-          </div>
-        </div>
-        </div>
-
-        <div class="vocabulary-card">
-          <div class="vocabulary-text" id="vocabularyText">Đang tải...</div>
         </div>
 
         <div class="input-section">
           <label class="input-label" for="answerInput"
             >Nhập lại từ tiếng Anh:</label
           >
-          <input
-            type="text"
+          <textarea
             id="answerInput"
             class="answer-input"
             placeholder="Nhập từ tiếng Anh và nhấn Enter..."
             autocomplete="off"
-          />
+            rows="3"
+          ></textarea>
         </div>
 
         <div class="feedback" id="feedback"></div>

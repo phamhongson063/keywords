@@ -369,6 +369,11 @@ function resetTimer() {
             mobileNextButton.style.opacity = '0';
             mobileNextButton.style.visibility = 'hidden';
         }
+        // Reset progress bar cho mobile
+        const timerContainer = document.querySelector('.timer-container');
+        if (timerContainer) {
+            timerContainer.style.setProperty('--timer-progress', '100%');
+        }
     } else {
         if (hintText) {
             hintText.textContent = '';
@@ -428,6 +433,15 @@ function startTimer() {
             const offset = circumference * (1 - progress);
             if (timerProgress) timerProgress.style.strokeDashoffset = offset;
             if (timerText) timerText.textContent = Math.ceil(timeLeft);
+            
+            // Cập nhật progress bar cho mobile
+            if (window.innerWidth <= 600) {
+                const timerContainer = document.querySelector('.timer-container');
+                if (timerContainer) {
+                    const progressPercent = (timeLeft / maxTime) * 100;
+                    timerContainer.style.setProperty('--timer-progress', `${progressPercent}%`);
+                }
+            }
 
             if (timerProgress) {
                 if (timeLeft <= 5) {
@@ -447,12 +461,10 @@ function startTimer() {
                 const hint = generateHint(wordForTimer.vocabulary, timeLeft);
                 
                 if (isMobile) {
+                    // Mobile: không hiển thị hint
                     if (mobileHintNotification && mobileHintText) {
-                        if (!hintShown) {
-                            hintShown = true;
-                            mobileHintNotification.classList.add('show', 'active');
-                        }
-                        mobileHintText.textContent = hint;
+                        mobileHintNotification.classList.remove('show', 'active');
+                        mobileHintText.textContent = '';
                     }
                 } else {
                     if (hintText && hintSection) {
@@ -563,18 +575,12 @@ function checkAnswer() {
 
         // So sánh chính xác tiếng Anh (case-insensitive nhưng giữ nguyên chính tả)
         const isCorrect = userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase().trim();
-
-        isAnswered = true;
         
         if (timer) {
             clearInterval(timer);
             timer = null;
         }
         
-        answerInput.readOnly = true;
-        answerInput.disabled = false;
-        answerInput.setAttribute('data-answered', 'true');
-
         const isMobile = window.innerWidth <= 600;
         
         if (isCorrect) {
@@ -585,7 +591,12 @@ function checkAnswer() {
             correctCount++;
         } else {
             answerInput.className = 'answer-input wrong';
-            feedback.className = 'feedback wrong show';
+            // Trên mobile dùng timeout style, desktop dùng wrong style
+            if (isMobile) {
+                feedback.className = 'feedback timeout show';
+            } else {
+                feedback.className = 'feedback wrong show';
+            }
             feedback.textContent = `❌ Sai rồi! Đáp án đúng: "${currentWord.vocabulary}"`;
             wrongCount++;
             
@@ -598,6 +609,16 @@ function checkAnswer() {
                 updateWrongWordsList();
             }
         }
+        
+        // Khóa input SAU KHI đã hiển thị feedback
+        answerInput.readOnly = true;
+        answerInput.disabled = false;
+        answerInput.setAttribute('data-answered', 'true');
+        
+        // Set isAnswered SAU một chút để đảm bảo feedback đã được render
+        setTimeout(() => {
+            isAnswered = true;
+        }, 100);
         
         updateScore();
         if (nextButton) {
@@ -688,19 +709,32 @@ function initEventListeners() {
             const hasShow = feedback.classList.contains('show');
             const hasText = feedback.textContent && feedback.textContent.trim() !== '';
             feedbackVisible = hasShow && hasText;
+            console.log('feedback check:', {
+                hasShow,
+                hasText,
+                classes: Array.from(feedback.classList),
+                text: feedback.textContent.substring(0, 50)
+            });
         }
         
         const inputHasValue = answerInput && answerInput.value.trim() !== '';
-        const inputLocked = answerInput && answerInput.readOnly;
+        console.log('inputHasValue:', inputHasValue);
+        console.log('feedbackVisible:', feedbackVisible);
+        console.log('isAnswered:', isAnswered);
         
-        if (inputLocked || feedbackVisible || isAnswered) {
+        // QUYẾT ĐỊNH: Ưu tiên kiểm tra feedback và isAnswered
+        // Nếu feedback đang hiển thị VÀ isAnswered = true -> đã có kết quả -> chuyển từ
+        if (feedbackVisible && isAnswered) {
+            console.log('>>> ANSWERED - Feedback visible and isAnswered=true - Calling nextWord()');
             try {
                 nextWord();
             } catch (error) {
                 console.error('ERROR in nextWord:', error);
             }
         }
-        else if (inputHasValue) {
+        // Nếu chưa trả lời nhưng có nhập -> kiểm tra đáp án
+        else if (inputHasValue && !isAnswered) {
+            console.log('>>> HAS INPUT - Calling checkAnswer()');
             try {
                 checkAnswer();
             } catch (error) {
@@ -711,6 +745,28 @@ function initEventListeners() {
 
     if (answerInput) {
         answerInput.addEventListener('keydown', handleEnterKey);
+        
+        // Scroll đến vocabulary-card khi input được focus trên mobile
+        answerInput.addEventListener('focus', () => {
+            const isMobile = window.innerWidth <= 600;
+            if (isMobile) {
+                const vocabularyCard = document.querySelector('.vocabulary-card');
+                if (vocabularyCard) {
+                    setTimeout(() => {
+                        // Scroll với offset để đảm bảo vocabulary-card hiển thị đầy đủ
+                        const cardRect = vocabularyCard.getBoundingClientRect();
+                        const container = document.querySelector('.container');
+                        if (container) {
+                            const scrollTop = container.scrollTop || window.pageYOffset;
+                            const targetScroll = scrollTop + cardRect.top - 20; // 20px padding từ top
+                            container.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                        } else {
+                            vocabularyCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 400); // Tăng delay để đợi bàn phím xuất hiện hoàn toàn
+                }
+            }
+        });
     }
     
     document.addEventListener('keydown', handleEnterKey);
