@@ -1,6 +1,7 @@
 const App = {
   components: {
-    LoadingScreen
+    LoadingScreen,
+    UpdateNotification
   },
   data() {
     return {
@@ -68,6 +69,7 @@ const App = {
   template: `
     <div>
       <LoadingScreen v-if="isLoading" @loaded="handleLoadingComplete" />
+      <UpdateNotification />
       <router-view v-if="!isLoading"></router-view>
     </div>
   `
