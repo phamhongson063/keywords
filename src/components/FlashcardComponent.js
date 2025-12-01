@@ -50,7 +50,8 @@ const FlashcardComponent = {
     return {
       vocabularyData: [],
       currentIndex: 0,
-      isFlipped: false
+      isFlipped: false,
+      isFlipping: false
     };
   },
   computed: {
@@ -95,6 +96,7 @@ const FlashcardComponent = {
       if (this.vocabularyData.length === 0) return;
       
       this.isFlipped = false;
+      this.isFlipping = false;
       this.currentIndex = 0;
     },
     showCard(index) {
@@ -108,7 +110,17 @@ const FlashcardComponent = {
         e.preventDefault();
         e.stopPropagation();
       }
+      
+      if (this.isFlipping) {
+        return;
+      }
+      
+      this.isFlipping = true;
       this.isFlipped = !this.isFlipped;
+      
+      setTimeout(() => {
+        this.isFlipping = false;
+      }, 600);
     },
     prevCard() {
       if (this.currentIndex > 0) {
