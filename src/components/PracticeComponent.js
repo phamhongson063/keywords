@@ -1,6 +1,3 @@
-// Practice Component - Fully Vue.js implementation
-// This replaces the vanilla JS practice.js file
-
 const PracticeComponentTemplate = `<div>
   <div class="top-bar">
     <div class="back-button-container">
@@ -112,10 +109,7 @@ const PracticeComponent = {
   template: PracticeComponentTemplate,
   data() {
     return {
-      // Vocabulary data
       vocabularyData: [],
-      
-      // Game state
       currentIndex: -1,
       currentWord: null,
       timeLeft: 20,
@@ -129,11 +123,9 @@ const PracticeComponent = {
       upcomingWords: [],
       completedWords: [],
       wrongWords: [],
-      
-      // UI state
       userAnswer: '',
       feedbackText: '',
-      feedbackType: '', // 'correct', 'wrong', 'timeout', ''
+      feedbackType: '',
       hintText: '',
       showHint: false,
       showNextButton: false,
@@ -141,14 +133,10 @@ const PracticeComponent = {
       isInputDisabled: false,
       isInputReadOnly: false,
       inputClass: 'answer-input',
-      
-      // Timer
       timer: null,
       timerProgress: 100,
       timerWarning: false,
       timerDanger: false,
-      
-      // Mode config
       modeConfig: {
         'vocabulary': {
           title: '📚 Học Từ Vựng',
@@ -178,8 +166,6 @@ const PracticeComponent = {
           hintField: 'vocabulary'
         }
       },
-      
-      // Processing flags
       isNextWordProcessing: false
     };
   },
@@ -235,7 +221,7 @@ const PracticeComponent = {
       return Math.ceil(this.timeLeft);
     },
     circumference() {
-      return 2 * Math.PI * 40; // r = 40
+      return 2 * Math.PI * 40;
     },
     strokeDashoffset() {
       const progress = this.timeLeft / this.maxTime;
@@ -243,7 +229,6 @@ const PracticeComponent = {
     }
   },
   methods: {
-    // Navigation
     goToPracticeMenu(e) {
       if (e) {
         e.preventDefault();
@@ -253,8 +238,6 @@ const PracticeComponent = {
         console.error('Navigation error:', err);
       });
     },
-    
-    // Normalize Vietnamese text
     normalize(text) {
       if (!text) return '';
       try {
@@ -267,8 +250,6 @@ const PracticeComponent = {
         return text.toLowerCase().trim();
       }
     },
-    
-    // Load vocabulary
     async loadVocabulary() {
       try {
         const response = await fetch('src/assets/data/vocabulary.json');
@@ -281,8 +262,6 @@ const PracticeComponent = {
         console.error('Error loading vocabulary:', error);
       }
     },
-    
-    // Get random word
     getRandomWord() {
       if (this.usedIndices.length >= this.vocabularyData.length) {
         this.usedIndices = [];
@@ -297,8 +276,6 @@ const PracticeComponent = {
       this.usedIndices.push(randomIndex);
       return this.vocabularyData[randomIndex];
     },
-    
-    // Generate upcoming words
     generateUpcomingWords() {
       if (this.upcomingWords.length > 0) {
         return;
@@ -365,8 +342,6 @@ const PracticeComponent = {
         }
       }
     },
-    
-    // Start game
     startGame() {
       this.generateUpcomingWords();
       
@@ -377,8 +352,6 @@ const PracticeComponent = {
         this.startTimer();
       }
     },
-    
-    // Reset timer
     resetTimer() {
       if (this.timer) {
         clearInterval(this.timer);
@@ -394,8 +367,6 @@ const PracticeComponent = {
       this.hintText = '';
       this.showMobileNextButton = false;
     },
-    
-    // Generate hint
     generateHint(text, timeLeft) {
       const progress = (10 - timeLeft) / 10;
       const minPercent = 0.2;
@@ -405,8 +376,6 @@ const PracticeComponent = {
       const hint = text.substring(0, hintLength);
       return hintLength < text.length ? hint + '...' : hint;
     },
-    
-    // Start timer
     startTimer() {
       if (this.timer) {
         clearInterval(this.timer);
@@ -472,8 +441,6 @@ const PracticeComponent = {
         }
       }, 100);
     },
-    
-    // Handle timeout
     handleTimeout() {
       this.isAnswered = true;
       if (!this.currentWord) return;
@@ -500,8 +467,6 @@ const PracticeComponent = {
         this.showMobileNextButton = true;
       }
     },
-    
-    // Check answer
     checkAnswer() {
       if (this.isAnswered) return;
       
@@ -560,8 +525,6 @@ const PracticeComponent = {
         this.showMobileNextButton = true;
       }
     },
-    
-    // Handle Enter key
     handleEnterKey(e) {
       if (e.key !== 'Enter') return;
       
@@ -581,8 +544,6 @@ const PracticeComponent = {
         this.checkAnswer();
       }
     },
-    
-    // Next word
     nextWord() {
       if (this.isNextWordProcessing) {
         return;
@@ -625,8 +586,6 @@ const PracticeComponent = {
         this.isNextWordProcessing = false;
       }
     },
-    
-    // Handle input focus (for mobile scroll)
     handleInputFocus() {
       const isMobile = window.innerWidth <= 600;
       if (isMobile) {
@@ -644,8 +603,6 @@ const PracticeComponent = {
   mounted() {
     document.body.classList.add('practice-page');
     this.loadVocabulary();
-    
-    // Add global Enter key listener
     document.addEventListener('keydown', this.handleEnterKey);
   },
   beforeUnmount() {

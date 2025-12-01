@@ -4,56 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Học Từ Vựng</title>
-    <!-- Common CSS for all pages -->
     <link rel="stylesheet" href="src/assets/css/common.css" />
-    <!-- Page-specific CSS will be loaded dynamically -->
   </head>
   <body>
     <div id="app"></div>
     
-    <!-- Redirect script - must run FIRST before any other scripts -->
     <script>
-      // Prevent direct URL access with query params - redirect to home
-      // This runs immediately, before any other scripts
       (function() {
         if (window.location.search) {
           window.location.replace(window.location.pathname + '#/');
+          return;
+        }
+        
+        const hash = window.location.hash || '#/';
+        if (hash !== '#/' && hash !== '#') {
+          window.location.replace(window.location.pathname + '#/');
+          return;
         }
       })();
     </script>
     
-    <!-- Vue 3 from CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
     
-    <!-- Load components first -->
     <script src="src/components/PracticeComponent.js"></script>
     <script src="src/components/FlashcardComponent.js"></script>
     
-    <!-- Load views (pages) - must be loaded before router -->
     <script src="src/views/Home.js"></script>
     <script src="src/views/PracticeMenu.js"></script>
     <script src="src/views/Practice.js"></script>
     <script src="src/views/Flashcard.js"></script>
     <script src="src/views/NotFound.js"></script>
     
-    <!-- Load router -->
     <script src="src/router/index.js"></script>
     
-    <!-- Load App -->
     <script src="src/App.js"></script>
     
-    <!-- Load main app -->
     <script>
-      // Wait a bit to ensure all components and router are loaded
       setTimeout(() => {
-        // Load main app after everything is ready
         const script = document.createElement('script');
         script.src = 'src/main.js';
         document.head.appendChild(script);
       }, 100);
     </script>
-    
-    <!-- CSS loading is now handled in src/main.js via router.afterEach -->
   </body>
 </html>

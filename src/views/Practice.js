@@ -1,4 +1,3 @@
-// Practice View Component - Uses Vue component instead of vanilla JS
 const Practice = {
   props: {
     mode: {
@@ -11,4 +10,3 @@ const Practice = {
   },
   template: `<PracticeComponent :mode="mode" />`
 };
-

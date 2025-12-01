@@ -1,6 +1,3 @@
-// Flashcard Component - Fully Vue.js implementation
-// This replaces the vanilla JS flashcard.js file
-
 const FlashcardComponentTemplate = `<div id="flashcard-page">
   <div class="back-button-container">
     <button class="back-button" @click="goToHome">

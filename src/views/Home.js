@@ -1,4 +1,3 @@
-// Home View Component
 const HomeTemplate = `<div class="desktop-container">
   <div class="computer-screen">
     <svg class="screen-frame" viewBox="0 0 800 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +25,6 @@ const HomeTemplate = `<div class="desktop-container">
 const Home = {
   template: HomeTemplate,
   mounted() {
-    // Disable browser research features
     const handlers = {
       contextmenu: (e) => { e.preventDefault(); return false; },
       selectstart: (e) => { e.preventDefault(); return false; },
@@ -61,4 +59,3 @@ const Home = {
     if (this._cleanup) this._cleanup();
   }
 };
-

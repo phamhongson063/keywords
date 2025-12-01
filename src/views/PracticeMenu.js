@@ -1,4 +1,3 @@
-// PracticeMenu View Component
 const PracticeMenuTemplate = `<div class="home-container">
   <button class="back-button-header" @click="$router.push('/')">
     <span class="back-icon">
@@ -32,12 +31,9 @@ const PracticeMenuTemplate = `<div class="home-container">
 const PracticeMenu = {
   template: PracticeMenuTemplate,
   mounted() {
-    // Add practice-page class to body để có cùng background với practice detail
     document.body.classList.add('practice-page');
   },
   beforeUnmount() {
-    // Remove practice-page class from body
     document.body.classList.remove('practice-page');
   }
 };
-
