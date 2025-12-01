@@ -25,13 +25,13 @@ textarea {
 
 /* Disable ALL transition, animation, and transform effects when changing routes */
 #app,
-#app *,
+#app *:not(.loading-screen):not(.loading-screen *),
 router-view,
-router-view *,
+router-view *:not(.loading-screen):not(.loading-screen *),
 .router-view,
-.router-view *,
+.router-view *:not(.loading-screen):not(.loading-screen *),
 [data-v-],
-[data-v-] *,
+[data-v-] *:not(.loading-screen):not(.loading-screen *),
 .v-enter-active,
 .v-leave-active,
 .v-enter-from,
@@ -62,6 +62,49 @@ router-view *,
 .menu-item:active .menu-icon {
   transform: scale(1.1) rotate(20deg) !important;
   transition: transform 0.3s ease !important;
+}
+
+/* Exception: Allow loading screen to have proper flexbox layout */
+.loading-screen,
+.loading-screen *,
+.loading-container,
+.loading-container * {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.loading-screen {
+  flex-direction: column !important;
+}
+
+.loading-container {
+  flex-direction: column !important;
+}
+
+/* Exception: Allow loading screen to have proper flexbox layout */
+.loading-screen {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.loading-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.progress-bar,
+.progress-fill {
+  display: block !important;
+}
+
+.loading-progress,
+.loading-message {
+  display: block !important;
 }
 
 /* Exception: Allow flashcard to have transform for flip animation */

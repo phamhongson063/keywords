@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Học Từ Vựng</title>
     <link rel="stylesheet" href="src/assets/css/common.css" />
+    <link rel="stylesheet" href="src/assets/css/loading.css" />
   </head>
   <body>
     <div id="app"></div>
@@ -15,18 +16,13 @@
           window.location.replace(window.location.pathname + '#/');
           return;
         }
-        
-        const hash = window.location.hash || '#/';
-        if (hash !== '#/' && hash !== '#') {
-          window.location.replace(window.location.pathname + '#/');
-          return;
-        }
       })();
     </script>
     
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
     
+    <script src="src/components/LoadingScreen.js"></script>
     <script src="src/components/PracticeComponent.js"></script>
     <script src="src/components/FlashcardComponent.js"></script>
     
