@@ -11,7 +11,7 @@ const FlashcardComponentTemplate = `<div id="flashcard-page">
   </div>
   <div class="flashcard-container">
     <div class="flashcard-wrapper">
-      <div id="flashcard" class="flashcard" :class="{ 'flipped': isFlipped }" @click="flipCard">
+      <div id="flashcard" class="flashcard" :class="{ 'flipped': isFlipped }" @click.stop="flipCard" @touchstart.stop="flipCard">
         <div id="flashcardFront" class="flashcard-front">
           <div class="flashcard-label">Từ vựng</div>
           <div class="flashcard-content">
@@ -98,7 +98,11 @@ const FlashcardComponent = {
       this.currentIndex = index;
       this.isFlipped = false;
     },
-    flipCard() {
+    flipCard(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       this.isFlipped = !this.isFlipped;
     },
     prevCard() {

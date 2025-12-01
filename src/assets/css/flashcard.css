@@ -139,6 +139,10 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .flashcard.flipped {
@@ -165,6 +169,9 @@
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .flashcard-front {

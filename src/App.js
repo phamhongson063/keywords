@@ -21,13 +21,19 @@ const App = {
     },
     checkResourcesLoaded() {
       const checkInterval = setInterval(() => {
-        const cssLoaded = document.getElementById('page-css') || 
-                          document.querySelector('link[href*="common.css"]');
+        const commonCssLoaded = document.querySelector('link[href*="common.css"]');
+        const loadingCssLoaded = document.querySelector('link[href*="loading.css"]');
+        const homeCssLoaded = document.querySelector('link[href*="home.css"]');
+        const practiceMenuCssLoaded = document.querySelector('link[href*="practice-menu.css"]');
+        const practiceCssLoaded = document.querySelector('link[href*="practice.css"]');
+        const flashcardCssLoaded = document.querySelector('link[href*="flashcard.css"]');
         const vueLoaded = typeof Vue !== 'undefined';
         const routerLoaded = typeof VueRouter !== 'undefined';
         const appLoaded = typeof App !== 'undefined' && typeof router !== 'undefined';
         
-        if (cssLoaded && vueLoaded && routerLoaded && appLoaded) {
+        if (commonCssLoaded && loadingCssLoaded && homeCssLoaded && 
+            practiceMenuCssLoaded && practiceCssLoaded && flashcardCssLoaded &&
+            vueLoaded && routerLoaded && appLoaded) {
           clearInterval(checkInterval);
           setTimeout(() => {
             this.isLoading = false;
@@ -36,7 +42,7 @@ const App = {
                 this.$router.push('/');
               }
             });
-          }, 500);
+          }, 300);
         }
       }, 100);
       

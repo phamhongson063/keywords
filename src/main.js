@@ -10,16 +10,15 @@ function normalize(text) {
 }
 
 function loadPageCSS(pageName) {
-  const existingLink = document.getElementById('page-css');
-  if (existingLink) {
-    existingLink.remove();
+  // All CSS files are now loaded in index.html, so this function is no longer needed
+  // But we keep it for compatibility in case it's called elsewhere
+  const existingLink = document.querySelector(`link[href*="${pageName}.css"]`);
+  if (!existingLink) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `src/assets/css/${pageName}.css`;
+    document.head.appendChild(link);
   }
-  
-  const link = document.createElement('link');
-  link.id = 'page-css';
-  link.rel = 'stylesheet';
-  link.href = `src/assets/css/${pageName}.css`;
-  document.head.appendChild(link);
 }
 
 function initApp() {

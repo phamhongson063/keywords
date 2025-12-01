@@ -25,13 +25,13 @@ textarea {
 
 /* Disable ALL transition, animation, and transform effects when changing routes */
 #app,
-#app *:not(.loading-screen):not(.loading-screen *),
+#app *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
 router-view,
-router-view *:not(.loading-screen):not(.loading-screen *),
+router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
 .router-view,
-.router-view *:not(.loading-screen):not(.loading-screen *),
+.router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
 [data-v-],
-[data-v-] *:not(.loading-screen):not(.loading-screen *),
+[data-v-] *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
 .v-enter-active,
 .v-leave-active,
 .v-enter-from,
@@ -111,12 +111,15 @@ router-view *:not(.loading-screen):not(.loading-screen *),
 #flashcard-page .flashcard-wrapper {
   transform: none !important;
   transform-style: preserve-3d !important;
+  transition: none !important;
+  animation: none !important;
 }
 
 #flashcard-page .flashcard {
-  transform: none !important;
+  transform: rotateY(0deg) !important;
   transition: transform 0.6s ease !important;
   transform-style: preserve-3d !important;
+  animation: none !important;
 }
 
 #flashcard-page .flashcard.flipped {
@@ -131,6 +134,8 @@ router-view *:not(.loading-screen):not(.loading-screen *),
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+  animation: none !important;
 }
 
 #flashcard-page .flashcard-front {
