@@ -21,7 +21,8 @@ const FlashcardComponentTemplate = `<div id="flashcard-page">
         <div id="flashcardBack" class="flashcard-back">
           <div class="flashcard-label">Nghĩa</div>
           <div class="flashcard-content">
-            <div id="meaningText" class="flashcard-text">{{ currentWordMeaning }}</div>
+            <div v-if="currentWordFurigana" class="flashcard-furigana">{{ currentWordFurigana }}</div>
+            <div class="flashcard-meaning">{{ currentWordMeaning }}</div>
           </div>
         </div>
       </div>
@@ -62,6 +63,10 @@ const FlashcardComponent = {
     currentWordVocabulary() {
       if (!this.currentWord) return 'Đang tải...';
       return this.currentWord.vocabulary || 'N/A';
+    },
+    currentWordFurigana() {
+      if (!this.currentWord) return '';
+      return this.currentWord.furigana || '';
     },
     currentWordMeaning() {
       if (!this.currentWord) return 'Đang tải...';

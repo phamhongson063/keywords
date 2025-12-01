@@ -230,7 +230,7 @@
 }
 
 .flashcard-text {
-  font-size: 3em;
+  font-size: 6em;
   line-height: 1.4;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -246,6 +246,36 @@
   padding: 0;
   font-size: 1.5em;
   font-weight: normal;
+}
+
+.flashcard-furigana {
+  font-size: 2.5em;
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 20px 40px 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  flex: 0 0 80%;
+  min-height: 0;
+}
+
+.flashcard-meaning {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 10px 40px 40px 40px;
+  flex: 0 0 20%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
 }
 
 .flashcard-controls {
@@ -369,8 +399,22 @@
   }
 
   .flashcard-text {
-    font-size: 2.5em;
+    font-size: 5em;
     padding: 30px;
+  }
+  
+  .flashcard-furigana {
+    font-size: 2em;
+    padding: 15px 30px 8px 30px;
+    flex: 0 0 80%;
+    min-height: 0;
+  }
+  
+  .flashcard-meaning {
+    font-size: 0.8em;
+    padding: 8px 30px 30px 30px;
+    flex: 0 0 20%;
+    min-height: 0;
   }
 
   .flashcard-label {
@@ -407,8 +451,22 @@
   }
 
   .flashcard-text {
-    font-size: 2em;
+    font-size: 4em;
     padding: 25px 20px;
+  }
+  
+  .flashcard-furigana {
+    font-size: 1.8em;
+    padding: 12px 20px 6px 20px;
+    flex: 0 0 80%;
+    min-height: 0;
+  }
+  
+  .flashcard-meaning {
+    font-size: 0.72em;
+    padding: 6px 20px 25px 20px;
+    flex: 0 0 20%;
+    min-height: 0;
   }
 
   .flashcard-label {

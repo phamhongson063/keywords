@@ -27,7 +27,7 @@ const PracticeComponentTemplate = `<div>
       <ul class="word-list">
         <li v-for="(item, index) in wordListItems" :key="item.word.id || index" 
             :class="['word-item', { 'current': item.isCurrent, 'completed': item.isCompleted }]">
-          <span class="word-vocab">{{ item.word.vocabulary }}</span>
+          <span class="word-vocab">{{ item.word.vocabulary }}{{ item.word.furigana ? ' (' + item.word.furigana + ')' : '' }}</span>
           <span class="word-meaning">{{ item.word.meaning }}</span>
         </li>
       </ul>
@@ -86,7 +86,7 @@ const PracticeComponentTemplate = `<div>
         <ul class="wrong-words-list">
           <li v-if="wrongWordsListItems.length === 0" class="wrong-words-empty">Chưa có từ nào sai</li>
           <li v-for="word in wrongWordsListItems" :key="word.id" class="wrong-word-item">
-            <div class="wrong-word-vocab">{{ word.vocabulary }}</div>
+            <div class="wrong-word-vocab">{{ word.vocabulary }}{{ word.furigana ? ' (' + word.furigana + ')' : '' }}</div>
             <div class="wrong-word-meaning">{{ word.meaning }}</div>
           </li>
         </ul>
@@ -184,7 +184,12 @@ const PracticeComponent = {
     },
     currentWordDisplay() {
       if (!this.currentWord) return 'Đang tải...';
-      return this.currentWord[this.config.displayField] || '';
+      const field = this.config.displayField;
+      const value = this.currentWord[field] || '';
+      if (field === 'vocabulary' && this.currentWord.furigana) {
+        return `${value} (${this.currentWord.furigana})`;
+      }
+      return value;
     },
     wordListItems() {
       const items = [];

@@ -25,13 +25,25 @@ textarea {
 
 /* Disable ALL transition, animation, and transform effects when changing routes */
 #app,
-#app *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
+#app
+  *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
+    #flashcard-page *
+  ),
 router-view,
-router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
+router-view
+  *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
+    #flashcard-page *
+  ),
 .router-view,
-.router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
+.router-view
+  *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
+    #flashcard-page *
+  ),
 [data-v-],
-[data-v-] *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(#flashcard-page *),
+[data-v-]
+  *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
+    #flashcard-page *
+  ),
 .v-enter-active,
 .v-leave-active,
 .v-enter-from,
@@ -192,7 +204,7 @@ router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):n
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 1.6em !important;
+  font-size: 4em !important;
   line-height: 1.4 !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
@@ -205,6 +217,36 @@ router-view *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):n
   padding: 0 !important;
   font-size: 1.5em !important;
   font-weight: normal !important;
+}
+
+#flashcard-page .flashcard-furigana {
+  font-size: 2.5em !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  padding: 20px 40px 10px 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #333 !important;
+  flex: 0 0 80% !important;
+  min-height: 0 !important;
+}
+
+#flashcard-page .flashcard-meaning {
+  font-size: 1em !important;
+  font-weight: normal !important;
+  line-height: 1.6 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  padding: 10px 40px 40px 40px !important;
+  flex: 0 0 20% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #555 !important;
 }
 
 /* Ensure router-view has proper display */

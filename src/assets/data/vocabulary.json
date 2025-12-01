@@ -1,113 +1,242 @@
 [
   {
     "id": 1,
-    "vocabulary": "rare",
-    "meaning": "Hiếm"
+    "vocabulary": "山伏",
+    "furigana": "やまぶし",
+    "meaning": "thầy tu núi, người tu hành trên núi"
   },
   {
     "id": 2,
-    "vocabulary": "hero stats",
-    "meaning": "Chỉ số Anh hùng"
+    "vocabulary": "ほら貝",
+    "furigana": "ほらがい",
+    "meaning": "tù và, ốc tù và"
   },
   {
     "id": 3,
-    "vocabulary": "rank",
-    "meaning": "Hạng"
+    "vocabulary": "吹き",
+    "furigana": "ふき",
+    "meaning": "thổi, thổi kèn"
   },
   {
     "id": 4,
-    "vocabulary": "type",
-    "meaning": "Loại"
+    "vocabulary": "寄付",
+    "furigana": "きふ",
+    "meaning": "quyên góp, đóng góp"
   },
   {
     "id": 5,
-    "vocabulary": "tank",
-    "meaning": "Chống chịu"
+    "vocabulary": "募る",
+    "furigana": "つのる",
+    "meaning": "kêu gọi, quyên góp"
   },
   {
     "id": 6,
-    "vocabulary": "infantry fortitude",
-    "meaning": "Kiên cố Bộ binh"
+    "vocabulary": "松の勧進",
+    "furigana": "まつのかんじん",
+    "meaning": "sự kiện quyên góp cho lễ hội thông"
   },
   {
     "id": 7,
-    "vocabulary": "use",
-    "meaning": "Sử dụng"
+    "vocabulary": "庄内",
+    "furigana": "しょうない",
+    "meaning": "Shonai (tên địa danh)"
   },
   {
     "id": 8,
-    "vocabulary": "level up",
-    "meaning": "Nâng cấp"
+    "vocabulary": "冬の訪れ",
+    "furigana": "ふゆのおとずれ",
+    "meaning": "sự đến của mùa đông"
   },
   {
     "id": 9,
-    "vocabulary": "lone",
-    "meaning": "đơn độc"
+    "vocabulary": "告げる",
+    "furigana": "つげる",
+    "meaning": "báo hiệu, thông báo"
   },
   {
     "id": 10,
-    "vocabulary": "captain",
-    "meaning": "đội trưởng"
+    "vocabulary": "山形県",
+    "furigana": "やまがたけん",
+    "meaning": "tỉnh Yamagata"
   },
   {
     "id": 11,
-    "vocabulary": "stood unyielding",
-    "meaning": "đứng vững, không khuất phục"
+    "vocabulary": "鶴岡市",
+    "furigana": "つるおかし",
+    "meaning": "thành phố Tsuruoka"
   },
   {
     "id": 12,
-    "vocabulary": "fall (of city)",
-    "meaning": "thất thủ, sụp đổ"
+    "vocabulary": "羽黒山",
+    "furigana": "はぐろさん",
+    "meaning": "núi Haguro"
   },
   {
     "id": 13,
-    "vocabulary": "led his squad",
-    "meaning": "dẫn dắt biệt đội"
+    "vocabulary": "修行",
+    "furigana": "しゅぎょう",
+    "meaning": "tu hành, luyện tập tâm linh"
   },
   {
     "id": 14,
-    "vocabulary": "relentless",
-    "meaning": "không ngừng nghỉ, dồn dập"
+    "vocabulary": "年末",
+    "furigana": "ねんまつ",
+    "meaning": "cuối năm"
   },
   {
     "id": 15,
-    "vocabulary": "waves of enemies",
-    "meaning": "làn sóng kẻ thù"
+    "vocabulary": "年越し",
+    "furigana": "としこし",
+    "meaning": "đón năm mới, qua năm"
   },
   {
     "id": 16,
-    "vocabulary": "carving a safe path",
-    "meaning": "mở ra con đường an toàn"
+    "vocabulary": "行事",
+    "furigana": "ぎょうじ",
+    "meaning": "sự kiện, lễ hội"
   },
   {
     "id": 17,
-    "vocabulary": "saving nearby towns",
-    "meaning": "cứu các thị trấn lân cận"
+    "vocabulary": "修験者",
+    "furigana": "しゅげんじゃ",
+    "meaning": "người tu hành Shugendo"
   },
   {
     "id": 18,
-    "vocabulary": "darkness",
-    "meaning": "Bóng Tối"
+    "vocabulary": "大みそか",
+    "furigana": "おおみそか",
+    "meaning": "đêm giao thừa"
   },
   {
     "id": 19,
-    "vocabulary": "brutal battle",
-    "meaning": "trận chiến tàn khốc"
+    "vocabulary": "元旦",
+    "furigana": "がんたん",
+    "meaning": "ngày mùng 1 Tết"
   },
   {
     "id": 20,
-    "vocabulary": "retired",
-    "meaning": "giải ngũ"
+    "vocabulary": "伝統",
+    "furigana": "でんとう",
+    "meaning": "truyền thống"
   },
   {
     "id": 21,
-    "vocabulary": "threat rises",
-    "meaning": "mối đe dọa trỗi dậy"
+    "vocabulary": "祭り",
+    "furigana": "まつり",
+    "meaning": "lễ hội"
   },
   {
     "id": 22,
-    "vocabulary": "kingdom",
-    "meaning": "vương quốc"
+    "vocabulary": "松例祭",
+    "furigana": "まつれいさい",
+    "meaning": "lễ hội thông truyền thống"
+  },
+  {
+    "id": 23,
+    "vocabulary": "風物詩",
+    "furigana": "ふうぶつし",
+    "meaning": "biểu tượng theo mùa, cảnh đẹp theo mùa"
+  },
+  {
+    "id": 24,
+    "vocabulary": "中心部",
+    "furigana": "ちゅうしんぶ",
+    "meaning": "trung tâm, khu vực trung tâm"
+  },
+  {
+    "id": 25,
+    "vocabulary": "商店街",
+    "furigana": "しょうてんがい",
+    "meaning": "phố mua sắm, khu thương mại"
+  },
+  {
+    "id": 26,
+    "vocabulary": "音",
+    "furigana": "おと",
+    "meaning": "âm thanh, tiếng"
+  },
+  {
+    "id": 27,
+    "vocabulary": "響かせる",
+    "furigana": "ひびかせる",
+    "meaning": "vang lên, làm vang"
+  },
+  {
+    "id": 28,
+    "vocabulary": "軒",
+    "furigana": "けん",
+    "meaning": "cửa hàng, nhà"
+  },
+  {
+    "id": 29,
+    "vocabulary": "回る",
+    "furigana": "まわる",
+    "meaning": "đi vòng quanh, thăm"
+  },
+  {
+    "id": 30,
+    "vocabulary": "声をかける",
+    "furigana": "こえをかける",
+    "meaning": "gọi, nói chuyện"
+  },
+  {
+    "id": 31,
+    "vocabulary": "受け取る",
+    "furigana": "うけとる",
+    "meaning": "nhận, tiếp nhận"
+  },
+  {
+    "id": 32,
+    "vocabulary": "家内安全",
+    "furigana": "かないあんぜん",
+    "meaning": "bình an trong gia đình"
+  },
+  {
+    "id": 33,
+    "vocabulary": "無病息災",
+    "furigana": "むびょうそくさい",
+    "meaning": "không bệnh tật, khỏe mạnh"
+  },
+  {
+    "id": 34,
+    "vocabulary": "御利益",
+    "furigana": "ごりやく",
+    "meaning": "phước lành, lợi ích tâm linh"
+  },
+  {
+    "id": 35,
+    "vocabulary": "お札",
+    "furigana": "おふだ",
+    "meaning": "bùa hộ mệnh, bùa may mắn"
+  },
+  {
+    "id": 36,
+    "vocabulary": "手渡す",
+    "furigana": "てわたす",
+    "meaning": "trao tay, đưa trực tiếp"
+  },
+  {
+    "id": 37,
+    "vocabulary": "音色",
+    "furigana": "ねいろ",
+    "meaning": "âm sắc, giai điệu"
+  },
+  {
+    "id": 38,
+    "vocabulary": "感じる",
+    "furigana": "かんじる",
+    "meaning": "cảm nhận, cảm thấy"
+  },
+  {
+    "id": 39,
+    "vocabulary": "前日",
+    "furigana": "ぜんじつ",
+    "meaning": "ngày trước, ngày hôm trước"
+  },
+  {
+    "id": 40,
+    "vocabulary": "続く",
+    "furigana": "つづく",
+    "meaning": "tiếp tục, kéo dài"
   }
 ]
-
