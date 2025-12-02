@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#667eea" />
     <meta name="description" content="Ứng dụng học từ vựng tiếng Anh" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <title>MyBôk v1.0.1</title>
+    <title>MyBôk v1.0.2</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="src/assets/icon/icon-192x192.png" />
     <link rel="stylesheet" href="src/assets/css/common.css" />
@@ -81,9 +81,10 @@
       ) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("./sw.js")
+            .register("./sw.js?version=1.0.2", { updateViaCache: 'none' })
             .then((registration) => {
               console.log("SW registered: ", registration);
+              
               registration.addEventListener("updatefound", () => {
                 const newWorker = registration.installing;
                 if (newWorker) {
@@ -97,6 +98,10 @@
                   });
                 }
               });
+              
+              setInterval(() => {
+                registration.update();
+              }, 60000);
             })
             .catch((registrationError) => {
               console.log("SW registration failed: ", registrationError);

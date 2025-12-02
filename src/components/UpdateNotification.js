@@ -73,7 +73,7 @@ const UpdateNotification = {
       this.checkForUpdates();
       this.updateCheckInterval = setInterval(() => {
         this.checkForUpdates();
-      }, 60000);
+      }, 30000);
     },
     checkForUpdates() {
       if ("serviceWorker" in navigator) {
