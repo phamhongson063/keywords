@@ -43,7 +43,6 @@ self.addEventListener('install', (event) => {
         console.error('Cache install failed:', error);
       })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -56,9 +55,10 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      return self.clients.claim();
     })
   );
-  return self.clients.claim();
 });
 
 self.addEventListener('message', (event) => {

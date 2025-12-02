@@ -31,22 +31,9 @@ const UpdateNotification = {
   },
   methods: {
     setupUpdateCheck() {
-      this.checkForUpdates();
-      this.updateCheckInterval = setInterval(() => {
-        this.checkForUpdates();
-      }, 60000);
-    },
-    checkForUpdates() {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistration().then((registration) => {
           if (registration) {
-            registration.update();
-            
-            if (registration.waiting) {
-              this.registration = registration;
-              this.showUpdateNotification = true;
-            }
-            
             registration.addEventListener('updatefound', () => {
               const newWorker = registration.installing;
               if (newWorker) {
@@ -60,7 +47,46 @@ const UpdateNotification = {
                 });
               }
             });
+            
+            if (registration.waiting) {
+              this.registration = registration;
+              this.showUpdateNotification = true;
+            }
           }
+        });
+      }
+      
+      this.checkForUpdates();
+      this.updateCheckInterval = setInterval(() => {
+        this.checkForUpdates();
+      }, 60000);
+    },
+    checkForUpdates() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+          if (registration) {
+            if (registration.waiting) {
+              this.registration = registration;
+              this.showUpdateNotification = true;
+              return;
+            }
+            
+            if (registration.installing) {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed') {
+                  if (navigator.serviceWorker.controller) {
+                    this.registration = registration;
+                    this.showUpdateNotification = true;
+                  }
+                }
+              });
+            } else {
+              registration.update();
+            }
+          }
+        }).catch((error) => {
+          console.error('Error checking for updates:', error);
         });
       }
     },
