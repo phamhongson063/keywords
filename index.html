@@ -2,10 +2,11 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#667eea" />
     <meta name="description" content="Ứng dụng học từ vựng tiếng Anh" />
-    <title>MyBôk v1.0.0</title>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>MyBôk v1.0.1</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="src/assets/icon/icon-192x192.png" />
     <link rel="stylesheet" href="src/assets/css/common.css" />
@@ -47,6 +48,24 @@
     <script src="src/App.js"></script>
 
     <script>
+      let touchStartY = 0;
+      let touchEndY = 0;
+      
+      document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      
+      document.addEventListener('touchmove', function(e) {
+        touchEndY = e.touches[0].clientY;
+        
+        if (window.scrollY === 0 && touchEndY > touchStartY) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      
+      document.body.style.overscrollBehaviorY = 'none';
+      document.documentElement.style.overscrollBehaviorY = 'none';
+      
       setTimeout(() => {
         const script = document.createElement("script");
         script.src = "src/main.js";
@@ -85,7 +104,7 @@
         });
       } else {
         console.log(
-          "Service Worker không được hỗ trợ hoặc cần HTTPS/localhost"
+          "Service Worker not supported or requires HTTPS/localhost"
         );
       }
     </script>

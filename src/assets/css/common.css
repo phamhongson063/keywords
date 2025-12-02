@@ -3,19 +3,31 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Tắt popup research của browser cho tất cả elements */
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Tắt select text cho tất cả elements */
 body {
   -webkit-user-select: none;
   user-select: none;
   font-family: Arial, sans-serif;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* Cho phép select text trong input và textarea */
+html {
+  overscroll-behavior-y: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 input,
 textarea {
   -webkit-user-select: text;
@@ -256,15 +268,13 @@ router-view {
   height: auto !important;
 }
 
-/* Practice page background */
 body.practice-page {
-  /* Background biển với gradient từ xanh trung tính nhạt đến xanh đậm - nhạt hơn */
   background: linear-gradient(
     180deg,
     #c5d5e5 0%,
-    /* Light Steel Blue nhạt hơn */ #a8d5e8 25%,
-    /* Sky Blue nhạt hơn */ #6ba8d6 60%,
-    /* Steel Blue nhạt hơn */ #5a9fd4 100% /* Dark Steel Blue nhạt hơn */
+    #a8d5e8 25%,
+    #6ba8d6 60%,
+    #5a9fd4 100%
   );
   background-attachment: fixed;
   min-height: 100vh;
@@ -274,7 +284,6 @@ body.practice-page {
   overflow-x: hidden;
 }
 
-/* Hiệu ứng sóng biển cho practice page */
 body.practice-page::before {
   content: "";
   position: fixed;
@@ -301,7 +310,6 @@ body.practice-page::before {
   z-index: 0;
 }
 
-/* Bỏ padding của practice-page trên mobile */
 @media (max-width: 600px) {
   body.practice-page {
     padding: 0 !important;
