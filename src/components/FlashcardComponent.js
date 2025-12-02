@@ -8,6 +8,12 @@ const FlashcardComponentTemplate = `<div id="flashcard-page">
       </span>
       <span class="back-text">Quay lại</span>
     </button>
+    <div class="flashcard-progress">
+      <div class="progress-text">{{ currentPosition }} / {{ vocabularyData.length }}</div>
+      <div class="progress-bar">
+        <div class="progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+      </div>
+    </div>
   </div>
   <div class="flashcard-container">
     <div class="flashcard-wrapper">
@@ -72,6 +78,14 @@ const FlashcardComponent = {
     currentWordMeaning() {
       if (!this.currentWord) return 'Đang tải...';
       return this.currentWord.meaning || 'N/A';
+    },
+    currentPosition() {
+      if (this.vocabularyData.length === 0) return 0;
+      return this.currentIndex + 1;
+    },
+    progressPercentage() {
+      if (this.vocabularyData.length === 0) return 0;
+      return Math.round(((this.currentIndex + 1) / this.vocabularyData.length) * 100);
     }
   },
   methods: {
@@ -95,9 +109,18 @@ const FlashcardComponent = {
     initializeFlashcard() {
       if (this.vocabularyData.length === 0) return;
       
+      const savedIndex = localStorage.getItem('flashcard-current-index');
+      if (savedIndex !== null) {
+        const index = parseInt(savedIndex, 10);
+        if (index >= 0 && index < this.vocabularyData.length) {
+          this.currentIndex = index;
+        }
+      } else {
+        this.currentIndex = 0;
+      }
+      
       this.isFlipped = false;
       this.isFlipping = false;
-      this.currentIndex = 0;
     },
     showCard(index) {
       if (index < 0 || index >= this.vocabularyData.length) return;
@@ -124,12 +147,16 @@ const FlashcardComponent = {
     },
     prevCard() {
       if (this.currentIndex > 0) {
-        this.showCard(this.currentIndex - 1);
+        const prevIndex = this.currentIndex - 1;
+        this.showCard(prevIndex);
+        localStorage.setItem('flashcard-current-index', prevIndex.toString());
       }
     },
     nextCard() {
       if (this.currentIndex < this.vocabularyData.length - 1) {
-        this.showCard(this.currentIndex + 1);
+        const nextIndex = this.currentIndex + 1;
+        this.showCard(nextIndex);
+        localStorage.setItem('flashcard-current-index', nextIndex.toString());
       }
     },
     handleKeyDown(e) {

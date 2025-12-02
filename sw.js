@@ -1,5 +1,5 @@
-const CACHE_VERSION = 'v1.0.2';
-const CACHE_NAME = `hoc-tu-vung-v1.0.2`;
+const CACHE_VERSION = 'v1.0.3';
+const CACHE_NAME = `hoc-tu-vung-v1.0.3`;
 const urlsToCache = [
   './',
   './index.html',

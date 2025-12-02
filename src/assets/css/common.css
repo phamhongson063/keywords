@@ -40,22 +40,30 @@ textarea {
 #app
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
+  ):not(.update-notification):not(.update-notification *):not(
+    .update-notification-overlay
+  ),
 router-view,
 router-view
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
+  ):not(.update-notification):not(.update-notification *):not(
+    .update-notification-overlay
+  ),
 .router-view,
 .router-view
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
+  ):not(.update-notification):not(.update-notification *):not(
+    .update-notification-overlay
+  ),
 [data-v-],
 [data-v-]
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
+  ):not(.update-notification):not(.update-notification *):not(
+    .update-notification-overlay
+  ),
 .v-enter-active,
 .v-leave-active,
 .v-enter-from,
@@ -216,7 +224,7 @@ router-view
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 4em !important;
+  font-size: 3em !important;
   line-height: 1.4 !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
