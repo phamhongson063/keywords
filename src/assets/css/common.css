@@ -28,22 +28,22 @@ textarea {
 #app
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ),
+  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
 router-view,
 router-view
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ),
+  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
 .router-view,
 .router-view
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ),
+  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
 [data-v-],
 [data-v-]
   *:not(.loading-screen):not(.loading-screen *):not(#flashcard-page):not(
     #flashcard-page *
-  ),
+  ):not(.update-notification):not(.update-notification *):not(.update-notification-overlay),
 .v-enter-active,
 .v-leave-active,
 .v-enter-from,

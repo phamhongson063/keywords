@@ -1,12 +1,13 @@
 .update-notification {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10000;
-  max-width: 500px;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2147483647 !important;
+  max-width: 400px;
   width: 90%;
-  animation: slideUp 0.3s ease;
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto !important;
 }
 
 .update-notification-content {
@@ -19,86 +20,99 @@
   gap: 15px;
 }
 
-.update-notification-icon {
-  font-size: 2em;
-  flex-shrink: 0;
-}
-
 .update-notification-text {
   flex: 1;
 }
 
-.update-notification-title {
-  font-size: 1.1em;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
 .update-notification-message {
-  font-size: 0.9em;
-  color: #666;
+  font-size: 0.95em;
+  color: #333;
   line-height: 1.4;
+  font-weight: 500;
 }
 
 .update-notification-button {
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1em;
-  font-weight: 600;
+  background: rgba(0, 122, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #007aff;
+  border: 1.5px solid rgba(0, 122, 255, 0.3);
+  border-radius: 50%;
+  padding: 0;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  font-weight: normal;
+}
+
+.update-notification-button .update-icon {
+  width: 24px;
+  height: 24px;
+  color: #007aff;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .update-notification-button:hover {
-  background: #5568d3;
+  background: rgba(0, 122, 255, 0.15);
+  border-color: rgba(0, 122, 255, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.update-notification-button:hover .update-icon {
+  transform: rotate(180deg);
 }
 
 .update-notification-button:active {
+  background: rgba(0, 122, 255, 0.2);
   transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes slideUp {
+.update-notification-button:active .update-icon {
+  transform: rotate(360deg);
+}
+
+@keyframes fadeIn {
   from {
-    transform: translateX(-50%) translateY(100%);
     opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
   }
   to {
-    transform: translateX(-50%) translateY(0);
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
 @media (max-width: 600px) {
   .update-notification {
-    bottom: 10px;
-    width: calc(100% - 20px);
+    width: auto;
+    max-width: 350px;
   }
-  
+
   .update-notification-content {
     padding: 15px;
     gap: 12px;
   }
-  
-  .update-notification-icon {
-    font-size: 1.5em;
-  }
-  
-  .update-notification-title {
-    font-size: 1em;
-  }
-  
+
   .update-notification-message {
-    font-size: 0.85em;
-  }
-  
-  .update-notification-button {
-    padding: 8px 16px;
     font-size: 0.9em;
   }
-}
 
+  .update-notification-button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .update-notification-button .update-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
