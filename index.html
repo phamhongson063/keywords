@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#667eea" />
     <meta name="description" content="Ứng dụng học từ vựng tiếng Anh" />
-    <title>Học Từ Vựng</title>
+    <title>MyBôk</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="src/assets/icon/icon-192x192.png" />
     <link rel="stylesheet" href="src/assets/css/common.css" />
@@ -18,64 +18,75 @@
   </head>
   <body>
     <div id="app"></div>
-    
+
     <script>
-      (function() {
+      (function () {
         if (window.location.search) {
-          window.location.replace(window.location.pathname + '#/');
+          window.location.replace(window.location.pathname + "#/");
           return;
         }
       })();
     </script>
-    
+
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
-    
+
     <script src="src/components/LoadingScreen.js"></script>
     <script src="src/components/UpdateNotification.js"></script>
     <script src="src/components/PracticeComponent.js"></script>
     <script src="src/components/FlashcardComponent.js"></script>
-    
+
     <script src="src/views/Home.js"></script>
     <script src="src/views/PracticeMenu.js"></script>
     <script src="src/views/Practice.js"></script>
     <script src="src/views/Flashcard.js"></script>
     <script src="src/views/NotFound.js"></script>
-    
+
     <script src="src/router/index.js"></script>
-    
+
     <script src="src/App.js"></script>
-    
+
     <script>
       setTimeout(() => {
-        const script = document.createElement('script');
-        script.src = 'src/main.js';
+        const script = document.createElement("script");
+        script.src = "src/main.js";
         document.head.appendChild(script);
       }, 100);
     </script>
     <script>
-      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
+      if (
+        "serviceWorker" in navigator &&
+        (location.protocol === "https:" ||
+          location.hostname === "localhost" ||
+          location.hostname === "127.0.0.1")
+      ) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
             .then((registration) => {
-              console.log('SW registered: ', registration);
-              registration.addEventListener('updatefound', () => {
+              console.log("SW registered: ", registration);
+              registration.addEventListener("updatefound", () => {
                 const newWorker = registration.installing;
                 if (newWorker) {
-                  newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                      console.log('New service worker available');
+                  newWorker.addEventListener("statechange", () => {
+                    if (
+                      newWorker.state === "installed" &&
+                      navigator.serviceWorker.controller
+                    ) {
+                      console.log("New service worker available");
                     }
                   });
                 }
               });
             })
             .catch((registrationError) => {
-              console.log('SW registration failed: ', registrationError);
+              console.log("SW registration failed: ", registrationError);
             });
         });
       } else {
-        console.log('Service Worker không được hỗ trợ hoặc cần HTTPS/localhost');
+        console.log(
+          "Service Worker không được hỗ trợ hoặc cần HTTPS/localhost"
+        );
       }
     </script>
   </body>
