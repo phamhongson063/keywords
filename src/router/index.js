@@ -5,6 +5,7 @@ const routes = [
   { path: '/practice-menu', component: PracticeMenu },
   { path: '/practice/:mode?', component: Practice, props: true },
   { path: '/flashcard', component: Flashcard },
+  { path: '/review', component: Review },
   { path: '/:pathMatch(.*)*', component: NotFound }
 ];
 

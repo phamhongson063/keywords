@@ -37,7 +37,7 @@ function initApp() {
           loadPageCSS('practice-menu');
         } else if (path.includes('practice')) {
           loadPageCSS('practice');
-        } else if (path.includes('flashcard')) {
+        } else if (path.includes('flashcard') || path.includes('review')) {
           loadPageCSS('flashcard');
         } else {
           loadPageCSS('home');
@@ -51,7 +51,7 @@ function initApp() {
         loadPageCSS('practice-menu');
       } else if (finalPath.includes('practice')) {
         loadPageCSS('practice');
-      } else if (finalPath.includes('flashcard')) {
+      } else if (finalPath.includes('flashcard') || finalPath.includes('review')) {
         loadPageCSS('flashcard');
       } else {
         loadPageCSS('home');
@@ -66,7 +66,7 @@ function initApp() {
         loadPageCSS('practice-menu');
       } else if (hash.includes('practice')) {
         loadPageCSS('practice');
-      } else if (hash.includes('flashcard')) {
+      } else if (hash.includes('flashcard') || hash.includes('review')) {
         loadPageCSS('flashcard');
       } else {
         loadPageCSS('home');

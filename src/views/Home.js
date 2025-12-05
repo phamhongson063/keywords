@@ -13,6 +13,10 @@ const HomeTemplate = `<div class="desktop-container">
           <div class="dashboard-icon">🃏</div>
           <div class="dashboard-title">Flash card</div>
         </div>
+        <div class="dashboard-item" @click="$router.push('/review')">
+          <div class="dashboard-icon">🔄</div>
+          <div class="dashboard-title">Ôn tập</div>
+        </div>
         <div class="dashboard-item" @click="$router.push('/practice-menu')">
           <div class="dashboard-icon">🎯</div>
           <div class="dashboard-title">Luyện Tập</div>

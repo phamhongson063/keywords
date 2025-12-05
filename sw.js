@@ -1,5 +1,5 @@
-const CACHE_VERSION = 'v1.0.4';
-const CACHE_NAME = `hoc-tu-vung-v1.0.4`;
+const CACHE_VERSION = 'v1.0.5';
+const CACHE_NAME = `hoc-tu-vung-v1.0.5`;
 const urlsToCache = [
   './',
   './index.html',
@@ -22,10 +22,12 @@ const urlsToCache = [
   './src/components/UpdateNotification.js',
   './src/components/PracticeComponent.js',
   './src/components/FlashcardComponent.js',
+  './src/components/ReviewFlashcardComponent.js',
   './src/views/Home.js',
   './src/views/PracticeMenu.js',
   './src/views/Practice.js',
   './src/views/Flashcard.js',
+  './src/views/Review.js',
   './src/views/NotFound.js',
   './src/router/index.js',
   './src/App.js',

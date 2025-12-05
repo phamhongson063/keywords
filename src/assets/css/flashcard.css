@@ -573,3 +573,58 @@
     padding: 15px;
   }
 }
+
+.no-cards-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.message-icon {
+  font-size: 4em;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.message-text {
+  font-size: 1.5em;
+  color: #4a5568;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .no-cards-message {
+    min-height: 50vh;
+    padding: 30px 20px;
+  }
+
+  .message-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+
+  .message-text {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 600px) {
+  .no-cards-message {
+    min-height: 40vh;
+    padding: 20px 15px;
+  }
+
+  .message-icon {
+    font-size: 2.5em;
+    margin-bottom: 12px;
+  }
+
+  .message-text {
+    font-size: 1em;
+  }
+}
