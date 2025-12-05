@@ -3,19 +3,19 @@
     "id": 1,
     "vocabulary": "山伏",
     "furigana": "やまぶし",
-    "meaning": "thầy tu núi, người tu hành trên núi"
+    "meaning": "người tu hành trên núi"
   },
   {
     "id": 2,
     "vocabulary": "ほら貝",
     "furigana": "ほらがい",
-    "meaning": "tù và, ốc tù và"
+    "meaning": "ốc tù và"
   },
   {
     "id": 3,
     "vocabulary": "吹き",
     "furigana": "ふき",
-    "meaning": "thổi, thổi kèn"
+    "meaning": "thổi"
   },
   {
     "id": 4,
@@ -27,7 +27,7 @@
     "id": 5,
     "vocabulary": "募る",
     "furigana": "つのる",
-    "meaning": "kêu gọi, quyên góp"
+    "meaning": "Kêu gọi/Quyên góp, Tuyển dụng, Thu thập/Tìm kiếm"
   },
   {
     "id": 6,
@@ -45,13 +45,13 @@
     "id": 8,
     "vocabulary": "冬の訪れ",
     "furigana": "ふゆのおとずれ",
-    "meaning": "sự đến của mùa đông"
+    "meaning": "Mùa đông đang đến"
   },
   {
     "id": 9,
     "vocabulary": "告げる",
     "furigana": "つげる",
-    "meaning": "báo hiệu, thông báo"
+    "meaning": "Thông báo, báo hiệu"
   },
   {
     "id": 10,
@@ -87,13 +87,13 @@
     "id": 15,
     "vocabulary": "年越し",
     "furigana": "としこし",
-    "meaning": "đón năm mới, qua năm"
+    "meaning": "Hành động vượt qua đêm cuối cùng của năm cũ để bước sang năm mới"
   },
   {
     "id": 16,
     "vocabulary": "行事",
     "furigana": "ぎょうじ",
-    "meaning": "sự kiện, lễ hội"
+    "meaning": "sự kiện, lễ hội, nghi thức, hoặc hoạt động"
   },
   {
     "id": 17,
@@ -135,7 +135,7 @@
     "id": 23,
     "vocabulary": "風物詩",
     "furigana": "ふうぶつし",
-    "meaning": "biểu tượng theo mùa, cảnh đẹp theo mùa"
+    "meaning": "nét đặc trưng theo mùa, biểu tượng theo mùa"
   },
   {
     "id": 24,
@@ -159,13 +159,13 @@
     "id": 27,
     "vocabulary": "響かせる",
     "furigana": "ひびかせる",
-    "meaning": "vang lên, làm vang"
+    "meaning": "làm cho vang lên, làm cho phát ra âm thanh"
   },
   {
     "id": 28,
     "vocabulary": "軒",
     "furigana": "けん",
-    "meaning": "cửa hàng, nhà"
+    "meaning": "mái hiên, nhà/cửa hàng"
   },
   {
     "id": 29,
@@ -189,19 +189,19 @@
     "id": 32,
     "vocabulary": "家内安全",
     "furigana": "かないあんぜん",
-    "meaning": "bình an trong gia đình"
+    "meaning": "gia đình an khang/hạnh phúc"
   },
   {
     "id": 33,
     "vocabulary": "無病息災",
     "furigana": "むびょうそくさい",
-    "meaning": "không bệnh tật, khỏe mạnh"
+    "meaning": "sức khỏe, không bệnh tật"
   },
   {
     "id": 34,
     "vocabulary": "御利益",
     "furigana": "ごりやく",
-    "meaning": "phước lành, lợi ích tâm linh"
+    "meaning": "phước lành, lợi ích tâm linh, sự phù hộ, hoặc kết quả tốt lành nhận được từ việc thờ cúng thần linh hay Phật"
   },
   {
     "id": 35,
@@ -213,13 +213,13 @@
     "id": 36,
     "vocabulary": "手渡す",
     "furigana": "てわたす",
-    "meaning": "trao tay, đưa trực tiếp"
+    "meaning": "trao tay, đưa tận tay, hoặc giao trực tiếp"
   },
   {
     "id": 37,
     "vocabulary": "音色",
     "furigana": "ねいろ",
-    "meaning": "âm sắc, giai điệu"
+    "meaning": "âm sắc, chất giọng, hoặc giai điệu"
   },
   {
     "id": 38,
